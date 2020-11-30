@@ -1,36 +1,45 @@
-<div class="row">
-    <div class="col-sm-8">
-        <img src="../../assets/Images/SiginUp.jpg" width="460" height="345">
+<div class="row justify-content-center">
+    <div class="col-lg-6 image-banner">
     </div>
-    <div class="col-sm-4" style="border-style: solid; border-width:2px;">
+    <div class="col-lg-4">
+        <div class="d-flex flex-column bd-highlight p-3" style="border-style: solid; border-width:2px;">
+            <div class="mb-auto p-2 bd-highlight">
+                <p class="text-muted text-center">
+                    Sign up to see <br> Crafts shared from your friends.
+                </p>
+                <div class="form-group text-center">
+                    <button type="button" class="btn btn-outline-primary btn-sm"><i
+                            class="fa fa-facebook-square p-1"></i>Facebook</button>
+                    <button type="button" class="btn btn-outline-primary btn-sm ml-2"><i
+                            class="fa fa-google-plus-square"></i> Google</button>
+                </div>
+                <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+                <form (ngSubmit)="onSubmit()" #signUpForm="ngForm" >
 
-        <form>
-            <div class="form-group">
-        <label>
-            Sign up to see photos and videos from your friends.
-        </label>
-        <button type="button" class="btn btn-primary"><i class="fa fa-facebook-square"></i> Login in with
-            Facebook</button>
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="email" required  email placeholder="Email" [(ngModel)]=user.email
+                            aria-label="Email" name="email" #email="ngModel">
+                            <span class="help-block" *ngIf="!email.valid && email.touched" > Please enter a valid Email address</span>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="name" name="name" required placeholder="Full Name" [(ngModel)]=user.name
+                            aria-label="Full Name">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="userName"  name="userName"  required placeholder="Username" [(ngModel)]=user.userName
+                            aria-label="Usernames">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="password" name="password" required placeholder="Password" [(ngModel)]=user.password
+                            aria-label="Password">
+                    </div>
+                    <button type="submit" [disabled]="!signUpForm.valid" class="btn btn-primary btn-block">Sign up</button>
+                </form>
             </div>
-            <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
-                    else.</small>
-            </div>
-            <div class="form-group">
-                <label for="exampleInputFullName">Full Name</label>
-                <input type="text" class="form-control" id="exampleInputFullName">
-            </div>
-            <div class="form-group">
-                <label for="exampleInputUserName">User Name</label>
-                <input type="text" class="form-control" id="exampleInputUserName">
-            </div>
-            <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1">
-            </div>            
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+        </div>
+        <div class="d-flex flex-column bd-highlight mt-3" style="border-style: solid; border-width:2px;">
+            <span class="p-2 text-center">Have an account? <a routerLink="/login">log in</a></span>
+        </div>
+
     </div>
 </div>

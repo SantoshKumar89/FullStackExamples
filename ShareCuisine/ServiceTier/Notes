@@ -1,0 +1,56 @@
+===Created a mongo db cluster in Mongodb Atlas
+https://cloud.mongodb.com/v2/5fc546e96f7a33224f8e7fca#clusters
+
+=== Build Simple RESTful API With NodeJs, ExpressJs And MongoDb
+
+=== package.json file gets Created
+
+npm init
+
+=== Install Express and Setup Server
+npm install express --save-dev 
+
+=== add below lines of code in index.js
+
+// Import express
+let express = require('express')
+// Initialize the app
+let app = express();
+// Setup server port
+var port = process.env.PORT || 3000;
+// Send message for default URL
+app.get('/', (req, res) => res.send('Hello World with Express'));
+// Launch app to listen to specified port
+app.listen(port, function () {
+     console.log("Running RestHub on port " + port);
+});
+
+
+
+=== We are going to inject a bit of MVC into this app structure to keep our files lean and separate concerns. We need to three more files listed below…
+api-routes — all api endpoint shall be defined in this file
+controller — processes HTTP requests and defines available endpoints
+model — manages database layer (request and response)
+
+
+
+====npm install mongoose --save
+
+Mongoose is Nodejs package for modeling Mongodb. It helps you handle validation and business logic for mongodb on Nodejs. You can learn more here.
+
+
+===body-parser npm install body-parser --save
+
+Body-parser enables your app to parse data from incoming request like form data via urlencode. We need to import this to our app and use them.
+
+
+== configure DB 
+
+// Deprecated: mongoose.connect('mongodb://localhost/resthub');
+mongoose.connect('mongodb://localhost/resthub', { useNewUrlParser: true});
+var db = mongoose.connection;
+
+
+
+== Create Model and Controllers
+

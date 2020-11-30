@@ -5,8 +5,8 @@ https://innovate.mygov.in/all-ebsb-recipe/#tab5
 ng new FrontTier
 
 ==HTML Layout Techniques and font imports in index.html
- Added bootstrap framework for easy layouting
- use fontawesome for icons
+ Added bootstrap framework for easy layouting {Grids and flex boxes}
+ import/use fontawesome for icons
 
 
 <header>
@@ -43,8 +43,18 @@ New folder styles created and updated in angular.json for structured scss
 
 
 
-===Working on login module
+===Working on signup module
 ng generate component signup
 
 template-driven form for signup
+
+The ngModel directive declared in the FormsModule lets you bind controls in your template-driven form to properties in your data model. 
+When you include the directive using the syntax for two-way data binding, [(ngModel)], Angular can track the value and user interaction of the control and keep the view synced with the model.
+
+
+first created html file with all necessary padding using bootstrap classes
+
+
+===Working on login module
+
 
