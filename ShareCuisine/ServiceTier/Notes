@@ -54,3 +54,5 @@ var db = mongoose.connection;
 
 == Create Model and Controllers
 
+Get/Put/Post/Delete
+GET,PUT and Delete will have /:id
