@@ -1,0 +1,105 @@
+https://innovate.mygov.in/all-ebsb-recipe/#tab5
+
+
+===Start
+ng new FrontTier
+
+==HTML Layout Techniques and font imports in index.html
+ Added bootstrap framework for easy layouting {Grids and flex boxes}
+ import/use fontawesome for icons
+
+
+<header>
+<nav>
+<div class="container"></div>
+<footer>
+
+==Create folder structured
+
+-Components
+-Models
+-Services
+
+===Creating modules with routes (Lazy Loading)
+ng generate module login --route login --module app.module
+ng generate module home --route home --module app.module
+ng generate module profile --route profile --module app.module
+ng generate module shared --route shared --module app.module
+
+== Update app.component.html with router outlet
+<router-outlet></router-outlet>
+
+
+== Working on static sharable content
+ng generate module static 
+ng g c header
+ng g c navbar
+ng g c footer
+
+
+export static module
+import static module in parent module (i.e app.module.ts)
+
+Then use the static content in app.component.html
+
+=== Created Scss to provide styling for 
+header and footer tags
+
+New folder styles created and updated in angular.json for structured scss
+
+
+
+===Working on signup module
+ng generate component signup
+
+template-driven form for signup
+
+The ngModel directive declared in the FormsModule lets you bind controls in your template-driven form to properties in your data model. 
+When you include the directive using the syntax for two-way data binding, [(ngModel)], Angular can track the value and user interaction of the control and keep the view synced with the model.
+
+
+first created html file with all necessary padding using bootstrap classes
+
+
+===Working on login module
+
+==Working on JWT authentication
+
+
+=== Connecting Angular and Services
+
+Complex https://angular.io/guide/http
+Simple example: https://medium.com/techiediaries-com/send-http-post-with-angular-9-8-httpclient-by-example-61e2dfdee8a9
+
+Add  apiUrl: 'http://localhost:3000' in environment.ts file
+Acess api URL by importing environment.ts file
+
+
+Before you can use HttpClient, you need to import the Angular HttpClientModule. Most apps do so in the root AppModule.
+
+You can then inject the HttpClient service as a dependency of an application class, as shown in the following ConfigService example.
+
+ng g service login-service
+
+import { HttpClient } from '@angular/common/http';
+constructor(private http: HttpClient) { }
+
+
+The HttpClient service makes use of observables for all transactions. 
+You must import the RxJS observable and operator symbols that appear in the example snippets. These ConfigService imports are typical.
+
+
+Define the service
+eg:
+/** POST: add a new user to the database */
+  addUser(user: User): Observable<User> {
+  return this.http.post<User>(`${environment.apiUrl}/api/v1/login`, {
+    user})
+}
+
+
+Import the service in component where u need to use and subscribe
+
+this.loginService.addUser(this.user).subscribe(
+      res => { this.router.navigate(['/home']); }
+    )

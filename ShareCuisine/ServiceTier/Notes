@@ -1,3 +1,7 @@
+Example
+https://medium.com/@dinyangetoh/how-to-build-simple-restful-api-with-nodejs-expressjs-and-mongodb-99348012925d
+
+
 ===Created a mongo db cluster in Mongodb Atlas
 https://cloud.mongodb.com/v2/5fc546e96f7a33224f8e7fca#clusters
 
@@ -56,3 +60,37 @@ var db = mongoose.connection;
 
 Get/Put/Post/Delete
 GET,PUT and Delete will have /:id
+
+== Add environment properties
+
+https://www.39digits.com/create-environment-specific-config-for-a-node-app
+
+npm i lodash --save-dev
+
+npm i dotenv --save-dev
+The dotenv NPM module loads credentials stored in a .env file and saves it in environment variables inside process.env for use within our code.
+Dotenv is a zero-dependency module that loads environment variables from a .env file into process.env. 
+Storing configuration in the environment separate from code is based on The Twelve-Factor App methodology.
+
+touch .env.sample
+
+mkdir -p config/env
+touch config/index.js
+touch config/env/{defaults,development}.js
+
+eg:
+
+.env
+PORT=3000
+
+config/env/defaults.js
+port: process.env.PORT
+
+use pory from default.js anywhere in the src 
+
+== Jwt token authentication
+
+npm install jsonwebtoken --save-dev
+
+const jwtToken = jwt.sign(userDetails, global.gConfig.jwt.access_token_secret);
+res.send({ token: jwtToken, refreshToken: jwtToken });

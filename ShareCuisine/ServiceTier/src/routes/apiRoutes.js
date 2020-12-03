@@ -1,7 +1,11 @@
 let router = require('express').Router();
 
-// Set default API response
+// Set User Route
 router.use("/user",require("../controller/userController"));
+
+// Set login route
+router.use("/login",require("../controller/loginController"));
+
 
 // Export API routes
 module.exports = router;

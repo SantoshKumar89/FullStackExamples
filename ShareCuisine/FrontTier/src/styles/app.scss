@@ -1,5 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 
+$base-color:#f1f1f1;
+
+
+
 /* Style the header */
 header {
   background-color: #666;
@@ -19,7 +23,7 @@ footer {
 
 .container {
   padding: 20px;
-  background-color: #f1f1f1;
+  background-color: $base-color;
 }
 
 
@@ -41,4 +45,16 @@ input.ng-invalid.ng-touched {
           left: 0;
           text-align: center;
       }
+  }
+
+  .inline{
+    display: inline;
+  }
+
+  div.sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    background-color: $base-color;
+    align-self: flex-start;
   }

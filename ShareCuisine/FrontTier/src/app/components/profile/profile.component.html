@@ -1,0 +1,49 @@
+<div class="row sticky" style="z-index: 1;">
+
+    <div class="col-4 py-4 text-center">
+        <img class="profilePicture" src="../../../assets/Images/SiginUp.jpg">
+    </div>
+    <div class="col-8 text-left">
+
+        <div class="d-flex flex-column">
+            <div class="p-2">
+                <h1 class="font-weight-lighter">Santosh Kumar</h1>   
+                <hr>             
+                <button type="button"
+                    class="btn btn-primary btn-sm mr-2" data-toggle="button"
+                    aria-pressed="false"><i class="fas fa-plus pr-2 "></i>Add Craft</button>
+                
+                <button type="button"
+                    class="btn btn-secondary btn-sm" data-toggle="button"
+                    aria-pressed="false"><i class="far fa-edit pr-2"></i>Edit Profile</button>
+                    
+            </div>
+            <div class="p-2 ">
+                <p><b>1084</b> Posts <b class="pl-3">13K</b> Followers <b class="pl-3">22</b> Following</p>
+
+            </div>
+            <div class="p-2">
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eveniet ut impedit laboriosam, molestiae
+                    officiis delectus neque. Temporibus error aspernatur, alias ex consequuntur ratione saepe iure,
+                    perspiciatis iste velit quae reprehenderit.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 ">
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <a class="nav-link active" id="nav-my-crafts-tab" data-toggle="tab" href="#nav-my-crafts" role="tab"
+                    aria-controls="nav-my-crafts" aria-selected="true">My Crafts</a>
+                <a class="nav-link" id="nav-saved-crafts-tab" data-toggle="tab" href="#nav-saved-crafts" role="tab"
+                    aria-controls="nav-saved-crafts" aria-selected="false">Saved Crafts</a>
+            </div>
+        </nav>
+    </div>
+</div>
+
+    <div class="tab-content"  id="nav-tabContent">
+        <app-my-crafts class="tab-pane fade show active sticky" id="nav-my-crafts" role="tabpanel"
+            aria-labelledby="nav-my-crafts-tab"></app-my-crafts>
+        <app-saved-crafts class="tab-pane fade sticky" id="nav-saved-crafts" role="tabpanel"
+            aria-labelledby="nav-saved-crafts-tab"></app-saved-crafts>
+    </div>
