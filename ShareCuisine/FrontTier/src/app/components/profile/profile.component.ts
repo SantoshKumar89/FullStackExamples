@@ -16,6 +16,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
   this.user=this.loginService.currentUserValue;
+
   this.nav.show();
   this.nav.disableSticky();
   }

@@ -50,7 +50,6 @@ userRoute.get("/:id", async function (req, res) {
 
 //Save User Details
 userRoute.post("/", async function (req, res) {
-    console.log(req.body);
     var user = new User();
     user.name = req.body.user.name;
     user.userName = req.body.user.userName;
@@ -58,7 +57,6 @@ userRoute.post("/", async function (req, res) {
     user.password = req.body.user.password;
     // save the contact and check for errors
     user.save(function (err) {
-        console.log("success added");
         res.json({
             status: "success",
             message: 'New User created!',

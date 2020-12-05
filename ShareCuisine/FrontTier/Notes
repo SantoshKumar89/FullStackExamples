@@ -26,6 +26,9 @@ ng generate module home --route home --module app.module
 ng generate module profile --route profile --module app.module
 ng generate module shared --route shared --module app.module
 
+== Created users model
+
+
 == Update app.component.html with router outlet
 <router-outlet></router-outlet>
 
@@ -103,3 +106,67 @@ Import the service in component where u need to use and subscribe
 this.loginService.addUser(this.user).subscribe(
       res => { this.router.navigate(['/home']); }
     )
+
+
+=== Creating profile page
+
+Created basic content using html and css
+
+
+== Creating Edit Profile
+
+ng g c edit-profile 
+
+Adding edit-profile component into Route module of profile
+
+const routes: Routes = [{ path: '', component: ProfileComponent },
+{ path: ':id', component: EditProfileComponent }
+];
+
+
+ADding route link in profile page
+
+routerLink="/profile/{{user._id}}"
+
+which will route when http://localhost:4200/profile/5fca6ae6d2b4ed13df50c221 is invoked
+
+
+
+
+==== General Component inside Edit profile will be made responsive form
+https://www.angularjswiki.com/angular/cant-bind-to-formgroup-since-it-is-not-a-known-property-of-form/
+
+1. Below modules needs to be imported in each child module
+
+FormsModule,
+ReactiveFormsModule
+
+
+2. Create a basic form
+
+
+<form [formGroup]="RegistrationFrom" (submit)="RegisterUser()">
+   <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" name="name" required>
+   </div>
+   <!--Other Form elements-->
+   <button type="submit" class="btn btn-default">Submit</button>
+</form>
+
+
+
+
+=== created one more scss file
+ "src/styles/profile.scss"
+
+ and added in angular.json so it is reusable
+
+
+== Created a module called Watch Module for showing videos
+
+
+== Logo Maker
+
+https://www.brandcrowd.com/maker/logo/cute-baby-elephants-68128?text=craft
+

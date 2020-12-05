@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NavbarServiceService } from './../../../services/navbar-service.service';
+import {LoginServiceService} from '../../../services/login-service.service';
+import { User } from 'src/app/models/user';
+
 
 @Component({
   selector: 'app-navbar',
@@ -8,9 +11,13 @@ import { NavbarServiceService } from './../../../services/navbar-service.service
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(public nav: NavbarServiceService) { }
+  user:User;
+
+  constructor(public nav: NavbarServiceService,private loginService: LoginServiceService) { }
 
   ngOnInit(): void {
+    this.user=this.loginService.currentUserValue;
+
   }
 
 }

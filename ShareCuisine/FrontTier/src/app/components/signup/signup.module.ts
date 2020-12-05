@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { SignupRoutingModule } from './signup-routing.module';
 import { SignupComponent } from './signup.component';
 import { FormsModule } from '@angular/forms';
+import { StaticModule } from '../static/static.module';
 
 
 
@@ -12,7 +13,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     SignupRoutingModule,
-    FormsModule
+    FormsModule,
+    StaticModule
   ]
 })
 export class SignupModule { }

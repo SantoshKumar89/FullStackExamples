@@ -5,7 +5,9 @@
     <div class="navbar-collapse collapse" id="collapsingNavbar">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" routerLink="/home"><i class="fas fa-home fa-2x"></i></a>
+                <a class="nav-link" routerLink="/home">
+                        <i class="fas fa-spa fa-2x" style="color:steelblue"> Easy Craft </i>
+                    </a>                    
             </li>
             
             <!--<li class="nav-item">
@@ -17,7 +19,7 @@
         </ul>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" routerLink="/profile" data-target="#myModal"  data-toggle="modal"><i class="fas fa-user-circle fa-2x"></i></a>                
+                <a class="nav-link" routerLink="/profile/{{user._id}}" data-target="#myModal"  data-toggle="modal"><i class="fas fa-user-circle fa-2x"></i></a>                
             </li>                        
             <!--<li class="nav-item">
                 <a class="nav-link" href="/login" data-target="#myModal"  data-toggle="modal"><i class="fas fa-sign-out-alt fa-lg"></i></a>

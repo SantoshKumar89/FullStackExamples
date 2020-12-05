@@ -1,3 +1,4 @@
+<div class="container">
 <div class="row sticky" style="z-index: 1;">
 
     <div class="col-4 py-4 text-center">
@@ -14,7 +15,7 @@
                     aria-pressed="false"><i class="fas fa-plus pr-2 "></i>Add Craft</button>
                 
                 <button type="button"
-                    class="btn btn-secondary btn-sm" data-toggle="button"
+                    class="btn btn-secondary btn-sm" data-toggle="button" routerLink="/profile/{{user._id}}/editProfile"
                     aria-pressed="false"><i class="far fa-edit pr-2"></i>Edit Profile</button>
                     
             </div>
@@ -47,3 +48,5 @@
         <app-saved-crafts class="tab-pane fade sticky" id="nav-saved-crafts" role="tabpanel"
             aria-labelledby="nav-saved-crafts-tab"></app-saved-crafts>
     </div>
+
+</div>    
