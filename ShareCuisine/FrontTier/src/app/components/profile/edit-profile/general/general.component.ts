@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { LoginServiceService } from '../../../../services/login-service.service';
 import { User } from 'src/app/models/user';
 
@@ -22,10 +22,10 @@ export class GeneralComponent implements OnInit {
     this.user = this.loginService.currentUserValue;
 
     this.generalForm = new FormGroup({
-      'name': new FormControl(this.user.name),
-      'userName': new FormControl(this.user.userName),
-      'email': new FormControl(this.user.email),
-      'password': new FormControl(this.user.password),
+      'name': new FormControl(this.user.name,Validators.required),
+      'userName': new FormControl(this.user.userName,[Validators.required,Validators.email]),
+      'email': new FormControl(this.user.email,Validators.required),
+      'password': new FormControl(this.user.password,Validators.required),
       'profile': new FormGroup({
         'description': new FormControl(this.user.profile !==undefined? this.user.profile.description:""),
         'phone': new FormControl(this.user.profile  !==undefined? this.user.profile.phone:"")

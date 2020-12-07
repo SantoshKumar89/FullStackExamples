@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link active" id="v-pills-title-tab" data-toggle="pill" href="#v-pills-title" role="tab"
+                    aria-controls="v-pills-title" aria-selected="true">Title</a>
+                <a class="nav-link" id="v-pills-tys-tab" data-toggle="pill" href="#v-pills-tys" role="tab"
+                    aria-controls="v-pills-tys" aria-selected="false">Target your students</a>
+                <a class="nav-link" id="v-pills-curriculum-tab" data-toggle="pill" href="#v-pills-curriculum" role="tab"
+                    aria-controls="v-pills-curriculum" aria-selected="false">Curriculum</a>
+                <a class="nav-link" id="v-pills-clp-tab" data-toggle="pill" href="#v-pills-clp" role="tab"
+                    aria-controls="v-pills-clp" aria-selected="false">Course landing page</a>
+                <a class="nav-link" id="v-pills-captions-tab" data-toggle="pill" href="#v-pills-captions" role="tab"
+                    aria-controls="v-pills-captions" aria-selected="false">Captions</a>
+                <a class="nav-link" id="v-pills-students-tab" data-toggle="pill" href="#v-pills-students" role="tab"
+                    aria-controls="v-pills-students" aria-selected="false">Students</a>
+                <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab"
+                    aria-controls="v-pills-settings" aria-selected="false">Settings</a>
+            </div>
+
+        </div>
+        <div class="col-9">
+            <div class="tab-content tab-custom p-4" id="v-pills-tabContent">
+                <div class="tab-pane fade " id="v-pills-title" role="tabpanel"
+                    aria-labelledby="v-pills-title-tab">
+                    <app-craft-title></app-craft-title>
+                </div>
+                <div class="tab-pane fade show active" id="v-pills-tys" role="tabpanel" aria-labelledby="v-pills-tys-tab">
+                    <app-target-your-students></app-target-your-students>
+                </div>
+                <div class="tab-pane fade" id="v-pills-curriculum" role="tabpanel" aria-labelledby="v-pills-curriculum-tab">
+                    <app-curriculum></app-curriculum>
+                </div>
+                <div class="tab-pane fade" id="v-pills-clp" role="tabpanel" aria-labelledby="v-pills-clp-tab">
+                <app-course-landing-page></app-course-landing-page>
+                </div>
+                <div class="tab-pane fade" id="v-pills-captions" role="tabpanel" aria-labelledby="v-pills-captions-tab">
+                   <app-captions></app-captions>
+                </div>
+                <div class="tab-pane fade" id="v-pills-students" role="tabpanel" aria-labelledby="v-pills-students-tab">
+                    <app-students></app-students>
+                </div>
+                <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+                    <app-settings></app-settings>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>

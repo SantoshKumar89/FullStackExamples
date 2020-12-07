@@ -11,7 +11,6 @@ ng new FrontTier
 
 <header>
 <nav>
-<div class="container"></div>
 <footer>
 
 ==Create folder structured
@@ -142,17 +141,27 @@ FormsModule,
 ReactiveFormsModule
 
 
-2. Create a basic form
+2. Create a basic form with [formGroup] and formControls
 
 
-<form [formGroup]="RegistrationFrom" (submit)="RegisterUser()">
+<form [formGroup]="generalForm" (submit)="RegisterUser()">
    <div class="form-group">
       <label for="name">Name</label>
-      <input type="text" name="name" required>
+      <input type="text" name="name" id="name" formControlName="name" class="form-control">
    </div>
    <!--Other Form elements-->
    <button type="submit" class="btn btn-default">Submit</button>
 </form>
+
+3. In Ts file
+
+  generalForm: FormGroup;
+
+
+this.generalForm = new FormGroup({
+      'name': new FormControl(this.user.name,Validators.required)      
+    })
+
 
 
 
@@ -169,4 +178,8 @@ ReactiveFormsModule
 == Logo Maker
 
 https://www.brandcrowd.com/maker/logo/cute-baby-elephants-68128?text=craft
+
+
+
+=== Creating add craft modules
 

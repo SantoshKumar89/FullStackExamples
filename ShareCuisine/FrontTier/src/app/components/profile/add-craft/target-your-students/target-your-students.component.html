@@ -1,0 +1,31 @@
+<h4 class="font-weight-light">Target your students</h4>
+<p class="font-weight-lighter">The descriptions you write here will help students decide if your course is the one for them.</p>
+
+<hr>
+
+<div>
+
+    <form [formGroup]="targetYourStudents" (onSubmit)="save()" class=" py-3">
+        <div class="form-group" formGroupName="learn">
+            <label> What will students learn in your course?</label>
+            <input type="text" class="form-control" formControlName="answer" id="answer" name="answer" placeholder="Example:">
+            <button type="button" name="add" id="add" class="btn btn-link my-2 text-decoration-none"><i
+                    class="fas fa-plus pr-1"></i> Add an Answer</button>
+        </div>
+        <div formGroupName="prerequisites" class="form-group">
+            <label> Are there any course requirements or prerequisites? </label>
+            <input type="text" class="form-control" formControlName="answer" id="answer" name="answer" placeholder="Example:">
+            <button type="button" name="add" id="add" class="btn btn-link my-2 text-decoration-none"><i
+                    class="fas fa-plus pr-1"></i> Add an Answer</button>
+        </div>
+        <div formGroupName="target" class="form-group">
+            <label> Who are your target students?</label>
+            <input type="text" class="form-control" formControlName="answer" id="answer" name="answer" placeholder="Example:">
+            <button type="button" name="add" id="add" class="btn btn-link my-2 text-decoration-none"><i
+                    class="fas fa-plus pr-1"></i> Add an Answer</button>
+        </div>
+
+
+    </form>
+
+</div>

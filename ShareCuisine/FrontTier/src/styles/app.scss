@@ -3,7 +3,6 @@
 $base-color:#f1f1f1;
 
 
-
 /* Style the header */
 header {
   background-color: #666;
@@ -21,7 +20,7 @@ footer {
 }
 
 
-.container {
+.container,.container-fluid {
   padding: 20px;
   background-color: $base-color;
 }

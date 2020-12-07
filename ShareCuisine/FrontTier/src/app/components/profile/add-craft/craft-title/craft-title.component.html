@@ -1,0 +1,10 @@
+<div class="text-center font-weight-lighter">
+    <h1 >How about a working title?</h1>
+    <p>It's ok if you can't think of a good title now. You can change it later.</p>
+</div>
+<form [formGroup]="titleForm" (submit)="save()">
+    <div class="form-group">
+        <input class="form-control form-control-lg" type="text" formControlName="title" id="title" placeholder="Eg: Paper Chain Wallhanging, Colorful Coupe Cocktail Glasses ...">
+    </div>
+    <button type="submit" [disabled]="!titleForm.valid" class="btn btn-success">Save and Continue</button>
+</form>

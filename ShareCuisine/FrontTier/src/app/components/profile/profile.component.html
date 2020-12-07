@@ -11,7 +11,7 @@
                 <h1 class="font-weight-lighter">Santosh Kumar</h1>   
                 <hr>             
                 <button type="button"
-                    class="btn btn-primary btn-sm mr-2" data-toggle="button"
+                    class="btn btn-primary btn-sm mr-2" data-toggle="button" routerLink="/profile/{{user._id}}/craft"
                     aria-pressed="false"><i class="fas fa-plus pr-2 "></i>Add Craft</button>
                 
                 <button type="button"
@@ -37,6 +37,8 @@
                     aria-controls="nav-my-crafts" aria-selected="true">My Crafts</a>
                 <a class="nav-link" id="nav-saved-crafts-tab" data-toggle="tab" href="#nav-saved-crafts" role="tab"
                     aria-controls="nav-saved-crafts" aria-selected="false">Saved Crafts</a>
+                <a class="nav-link" id="nav-saved-crafts-tab" data-toggle="tab" href="#nav-saved-crafts" role="tab"
+                    aria-controls="nav-saved-crafts" aria-selected="false">Draft Crafts</a>
             </div>
         </nav>
     </div>
