@@ -1,1 +1,40 @@
-<p>course-landing-page works!</p>
+<h4 class="font-weight-light">Course landing page</h4>
+<hr>
+<div class="py-4">
+    <form [formGroup]="landingPageForm" (submit)="save()">
+        <div class="form-group">
+            <label>Course title</label>
+            <input type="text" id="courseTitle" name="courseTitle" class="form-control" formControlName="courseTitle">
+        </div>
+        <div class="form-group">
+            <label>Course subtitle</label>
+            <input type="text" id="courseSubtitle" name="courseSubtitle" class="form-control"
+                formControlName="courseSubtitle">
+        </div>
+
+        <div class="form-group">
+            <label>Course description</label>
+            <textarea type="text-area" id="courseDescription" name="courseDescription" class="form-control"
+                formControlName="courseDescription"></textarea>
+        </div>
+   
+        <div class="form-group" formGroupName="basicInfo">
+            <label>Basic Info</label>
+            <div class="form-inline">
+                <select class="form-control" formControlName="language" >
+                    <option value="" disabled> Choose a language</option>
+                    <option *ngFor="let language of languages" [ngValue]="language">
+                        {{ language.name }}
+                       </option>
+                </select>
+                <select id="level" name="level" class="form-control" formControlName="level">
+                    <option>Small select</option>
+                </select>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-default">Submit</button>
+
+
+    </form>
+</div>

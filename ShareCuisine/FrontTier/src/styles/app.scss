@@ -50,6 +50,31 @@ input.ng-invalid.ng-touched {
     display: inline;
   }
 
+  /* Style the form - display items horizontally */
+
+  .form-inline {  
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+  }
+
+/* Style the input fields */
+  .form-inline input {
+    vertical-align: middle;
+    margin: 5px 10px 5px 0;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+  }
+  
+  /* Style the input fields */
+  .form-inline select {
+    vertical-align: middle;
+    margin: 5px 10px 5px 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+  }
+
   div.sticky {
     position: -webkit-sticky;
     position: sticky;

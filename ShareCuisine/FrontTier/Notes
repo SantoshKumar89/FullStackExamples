@@ -144,7 +144,7 @@ ReactiveFormsModule
 2. Create a basic form with [formGroup] and formControls
 
 
-<form [formGroup]="generalForm" (submit)="RegisterUser()">
+<form [formGroup]="generalForm" (submit)="onSubmit()">
    <div class="form-group">
       <label for="name">Name</label>
       <input type="text" name="name" id="name" formControlName="name" class="form-control">
@@ -163,7 +163,9 @@ this.generalForm = new FormGroup({
     })
 
 
-
+onSubmit() {
+    console.log(JSON.stringify(this.generalForm.value));
+  }
 
 
 === created one more scss file
@@ -182,4 +184,18 @@ https://www.brandcrowd.com/maker/logo/cute-baby-elephants-68128?text=craft
 
 
 === Creating add craft modules
+
+Form is required for select with options
+
+https://www.positronx.io/angular-7-select-dropdown-examples-with-reactive-forms/
+
+
+eg: 
+City: string = ['Florida', 'South Dakota', 'Tennessee', 'Michigan']
+
+
+<select class="custom-select" (change)="changeCity($event)" formControlName="cityName">
+   <option value="" disabled>Choose your city</option>
+   <option *ngFor="let city of City" [ngValue]="city">{{city}}</option>
+</select>
 
