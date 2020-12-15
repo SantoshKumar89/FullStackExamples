@@ -17,23 +17,61 @@
             <textarea type="text-area" id="courseDescription" name="courseDescription" class="form-control"
                 formControlName="courseDescription"></textarea>
         </div>
-   
+
         <div class="form-group" formGroupName="basicInfo">
             <label>Basic Info</label>
             <div class="form-inline">
-                <select class="form-control" formControlName="language" >
+                <select class="form-control" formControlName="language">
                     <option value="" disabled> Choose a language</option>
                     <option *ngFor="let language of languages" [ngValue]="language">
                         {{ language.name }}
-                       </option>
+                    </option>
                 </select>
                 <select id="level" name="level" class="form-control" formControlName="level">
-                    <option>Small select</option>
+                    <option value="" disabled> Select a level</option>
+                    <option *ngFor="let level of levels" [ngValue]="level">
+                        {{level.value}}
+                    </option>
                 </select>
             </div>
         </div>
 
-        <button type="submit" class="btn btn-default">Submit</button>
+        <div class="form-group">
+            <label>Course image</label>
+            <div class="row ">
+                <div class="col-6">
+                    <img src="https://res.cloudinary.com/mhmd/image/upload/v1556294929/matthew-hamilton-351641-unsplash_zmvozs.jpg"
+                        class="img-thumbnail" alt="...">
+                </div>
+                <div class="col-6">
+                    <label>Upload your course image here. It must meet our course image quality standards to be
+                        accepted.
+                        Important guidelines: 750x422 pixels; .jpg, .jpeg,. gif, or .png. no text on the image.</label>
+                    <div class="mb-3">
+                        <input class="form-control form-control-sm" id="formFileSm" type="file"
+                            formControlName="courseImage">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Promotional video</label>
+            <div class="row ">
+                <div class="col-6">
+                    <img src="https://res.cloudinary.com/mhmd/image/upload/v1556294927/cody-davis-253928-unsplash_vfcdcl.jpg"
+                        class="img-thumbnail" alt="...">
+                </div>
+                <div class="col-6">
+                    <label>Students who watch a well-made promo video are 5X more likely to enroll in your course. We've seen that statistic go up to 10X for exceptionally awesome videos. Learn how to make yours awesome!</label>
+                    <div class="mb-3">
+                        <input class="form-control form-control-sm" id="formFileSm" type="file"
+                            formControlName="promotionalVideo">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="mt-5 btn btn-success btn-block">Save</button>
 
 
     </form>

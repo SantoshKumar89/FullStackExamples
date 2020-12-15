@@ -1,31 +1,42 @@
 <h4 class="font-weight-light">Target your students</h4>
-<p class="font-weight-lighter">The descriptions you write here will help students decide if your course is the one for them.</p>
+<p class="font-weight-lighter">The descriptions you write here will help students decide if your course is the one for
+    them.</p>
 
 <hr>
 
 <div>
 
-    <form [formGroup]="targetYourStudents" (onSubmit)="save()" class=" py-3">
+    <form [formGroup]="targetYourStudents" (submit)="save()" class=" py-3">
+
         <div class="form-group" formGroupName="learn">
             <label> What will students learn in your course?</label>
-            <input type="text" class="form-control" formControlName="answer" id="answer" name="answer" placeholder="Example:">
-            <button type="button" name="add" id="add" class="btn btn-link my-2 text-decoration-none"><i
-                    class="fas fa-plus pr-1"></i> Add an Answer</button>
+            <div formArrayName="answer"
+                *ngFor="let answerControl of targetYourStudents.get('learn').get('answer')['controls']; let i=index">
+                <input type="text" class="form-control mb-2" [formControlName]="i" id="i" name="answer"
+                    placeholder="Add an Answer">
+            </div>
+            <button type="button" name="add" id="add" class="btn btn-link my-2 text-decoration-none"
+                (click)="addAnswerToLearn()"><i class="fas fa-plus pr-1"></i> Add an Answer</button>
         </div>
         <div formGroupName="prerequisites" class="form-group">
             <label> Are there any course requirements or prerequisites? </label>
-            <input type="text" class="form-control" formControlName="answer" id="answer" name="answer" placeholder="Example:">
-            <button type="button" name="add" id="add" class="btn btn-link my-2 text-decoration-none"><i
+            <div formArrayName="answer" *ngFor="let answerControl of targetYourStudents.get('prerequisites').get('answer')['controls']; let i=index">
+            <input type="text" class="form-control mb-2" [formControlName]="i" id="i" name="answer"
+                placeholder="Add an Answer">
+            </div>    
+            <button type="button" name="add" id="add" (click)="addAnswerToPrerequisites()" class="btn btn-link my-2 text-decoration-none"><i
                     class="fas fa-plus pr-1"></i> Add an Answer</button>
         </div>
         <div formGroupName="target" class="form-group">
             <label> Who are your target students?</label>
-            <input type="text" class="form-control" formControlName="answer" id="answer" name="answer" placeholder="Example:">
-            <button type="button" name="add" id="add" class="btn btn-link my-2 text-decoration-none"><i
+            <div formArrayName="answer" *ngFor="let answer of targetYourStudents.get('target').get('answer')['controls']; let i=index ">
+            <input type="text" class="form-control mb-2" [formControlName]="i" id="i" name="answer"
+                placeholder="Add an Answer">
+             </div>   
+            <button type="button" name="add" (click)="addAnswerToTarget()" id="add" class="btn btn-link my-2 text-decoration-none"><i
                     class="fas fa-plus pr-1"></i> Add an Answer</button>
         </div>
-
-
+        <button type="submit" class="btn btn-success btn-block" [disabled]="!targetYourStudents.valid"> Save </button>
     </form>
 
 </div>
