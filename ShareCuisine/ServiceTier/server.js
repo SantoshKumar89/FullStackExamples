@@ -14,7 +14,7 @@ const cors = require('cors');
 //mongoose.connect('mongodb+srv://admin:2020adminJP@cluster0.zhq9g.mongodb.net/Dev?retryWrites=true&w=majority', { useNewUrlParser: true,useUnifiedTopology: true });
 let {host,user,password,database}=config.mongoDB.connection;
 mongoose.connect(`mongodb+srv://${user}:${password}@${host}/${database}?retryWrites=true&w=majority`, {useNewUrlParser: true,useUnifiedTopology: true });
-var db = mongoose.connection;
+let db = mongoose.connection;
 
 // Initialize the app
 let app = express();
@@ -29,7 +29,7 @@ app.use(bodyParser.urlencoded({
 
  app.use(bodyParser.json());
 // Setup server port
-var port = process.env.PORT || config.PORT;
+let port = process.env.PORT || config.PORT;
 
 // configure our routes
 app.use('/api/v1', apiRoutes);

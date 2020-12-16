@@ -50,7 +50,7 @@ userRoute.get("/:id", async function (req, res) {
 
 //Save User Details
 userRoute.post("/", async function (req, res) {
-    var user = new User();
+    let user = new User();
     user.name = req.body.user.name;
     user.userName = req.body.user.userName;
     user.email = req.body.user.email;
