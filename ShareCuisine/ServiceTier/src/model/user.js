@@ -20,6 +20,12 @@ const userSchema = mongoose.Schema({
     create_date: {
         type: Date,
         default: Date.now
+    },
+    description: {
+        type: String       
+    },
+    phone: {
+        type: Number       
     }
 });
 // Export user model

@@ -13,7 +13,7 @@ const cors = require('cors');
 // Connect to Mongoose and set connection variable
 //mongoose.connect('mongodb+srv://admin:2020adminJP@cluster0.zhq9g.mongodb.net/Dev?retryWrites=true&w=majority', { useNewUrlParser: true,useUnifiedTopology: true });
 let {host,user,password,database}=config.mongoDB.connection;
-mongoose.connect(`mongodb+srv://${user}:${password}@${host}/${database}?retryWrites=true&w=majority`, {useNewUrlParser: true,useUnifiedTopology: true });
+mongoose.connect(`mongodb+srv://${user}:${password}@${host}/${database}?retryWrites=true&w=majority`, {useNewUrlParser: true,useUnifiedTopology: true , 'useFindAndModify': false});
 let db = mongoose.connection;
 
 // Initialize the app

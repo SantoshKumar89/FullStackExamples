@@ -1,40 +1,44 @@
 const mongoose = require('mongoose');
-const languageSchema= require('../model/language');
-
-const levelSchema= require('../model/level');
+const Schema = mongoose.Schema;
 
 // Setup schema
-const craftSchema = mongoose.Schema({    
-    publish: {
-        type:Boolean,
-        default: true
+const craftSchema = mongoose.Schema({
+    createdBy: {
+        type: Schema.Types.ObjectId, ref: 'User'
     },
-    enableCertificate:{
-        type:Boolean,
+    createdDate: {
+        type: Date,
+        default: Date.now
+      },
+    publish: {
+        type: Boolean,
+        default: false
+    },
+    enableCertificate: {
+        type: Boolean,
         default: true
     },
     title: {
         type: String,
         required: true
     },
-    targetYourStudents:{
-        learn:{
+    targetYourStudents: {
+        learn: {
             type: [String]
         },
-        prerequisites:{
+        prerequisites: {
             type: [String]
         },
-        targetStudents:{
+        targetStudents: {
             type: [String]
         }
     },
-    curriculum:{
+    curriculum: {
 
     },
-    courseLandingPage:{
-        courseTitle:{
-            type: String,
-            required: true
+    courseLandingPage: {
+        courseTitle: {
+            type: String
         },
         courseSubtitle: {
             type: String
@@ -42,34 +46,36 @@ const craftSchema = mongoose.Schema({
         courseDescription: {
             type: String
         },
-        basicInfo:{
-            language:{
-                type: languageSchema
+        basicInfo: {
+            language: {
+                type: Schema.Types.ObjectId, ref: 'Language'
             },
-            level:{
-                type: levelSchema
+            level: {
+                type: Schema.Types.ObjectId, ref: 'Level'
             }
 
         }
     },
-    courseImage:{
-        type:string
+    courseImage: {
+        type: String
     },
-    promotionalVideo:{
-        type:string
+    promotionalVideo: {
+        type: String
     },
 
-    settings:{
-        enrollment:{
-            option:{
-                type:string
+    settings: {
+        enrollment: {
+            option: {
+                type: String
             },
-            password:{
-                type:string
+            password: {
+                type: String
             }
         }
+
     }
-
+}, {
+    versionKey: false
 });
 // Export craft model
 const craft = module.exports = mongoose.model('craft', craftSchema);

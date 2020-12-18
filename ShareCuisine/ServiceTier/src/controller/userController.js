@@ -75,6 +75,9 @@ userRoute.put("/:id", async function (req, res) {
         user.userName = req.body.user.userName;
         user.email = req.body.user.email;
         user.password = req.body.user.password;
+        user.description = req.body.user.description;
+        user.phone = req.body.user.phone;
+    
         // save the user and check for errors
         user.save(function (err) {
             if (err)
