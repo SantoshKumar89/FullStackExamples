@@ -15,12 +15,11 @@
                 <input type="text" class="form-control mb-2" [formControlName]="i" id="i" name="answer"
                     placeholder="Add an Answer">
             </div>
-             <div>   
+                
             <button type="button" name="add" id="add" class="btn btn-outline-primary text-decoration-none btn-sm border-0"
                 (click)="addAnswerToLearn()"><i class="fas fa-plus pr-1"></i> Add</button>
             <button type="button" name="remove" id="remove" class="btn btn-outline-danger btn-sm float-right  border-0  text-decoration-none" [disabled]="(targetYourStudents.get('learn').get('answer')['controls'].length) === 1 ? true : false "
                 (click)="removeAnswerToLearn()"><i class="fas fa-minus"></i> Remove</button>    
-            </div>
         </div>
         <div formGroupName="prerequisites" class="form-group py-3">
             <label> Are there any course requirements or prerequisites? </label>
@@ -45,7 +44,7 @@
              <button type="button" name="remove" id="remove" class="btn btn-outline-danger btn-sm float-right  border-0  text-decoration-none" [disabled]="(targetYourStudents.get('target').get('answer')['controls'].length) === 1 ? true : false "
                     (click)="removeAnswerToTarget()"><i class="fas fa-minus"></i> Remove</button>
         </div>
-        <button type="submit" class="btn btn-success btn-block" [disabled]="!targetYourStudents.valid"> Save </button>
+        <button type="submit" (submit)="save()" class="btn btn-success btn-block" [disabled]="!targetYourStudents.valid"> Save </button>
     </form>
 
 </div>

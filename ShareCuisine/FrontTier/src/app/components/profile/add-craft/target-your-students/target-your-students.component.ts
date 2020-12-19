@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl ,FormArray, Validators} from '@angular/forms';
+import { CraftFormService } from '../craft-form.service'
 
 @Component({
   selector: 'app-target-your-students',
@@ -12,9 +13,11 @@ export class TargetYourStudentsComponent implements OnInit {
   targetYourStudents:FormGroup;
 
 
-  constructor() { }
+  constructor(private craftForm: CraftFormService) { }
 
   ngOnInit(): void {
+
+    this.craftForm.craft.subscribe(res => {
     this.targetYourStudents = new FormGroup({
       'learn': new FormGroup({
         'answer': new FormArray([new FormControl("")])
@@ -25,7 +28,7 @@ export class TargetYourStudentsComponent implements OnInit {
       'target': new FormGroup({
         'answer': new FormArray([new FormControl("")])
       })
-    })
+    })})
   }
 
   save(){
