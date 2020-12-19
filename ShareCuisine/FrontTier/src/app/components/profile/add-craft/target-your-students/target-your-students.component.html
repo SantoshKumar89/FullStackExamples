@@ -12,7 +12,7 @@
             <label> What will students learn in your course?</label>
             <div formArrayName="answer"
                 *ngFor="let answerControl of targetYourStudents.get('learn').get('answer')['controls']; let i=index">
-                <input type="text" class="form-control mb-2" [formControlName]="i" id="i" name="answer"
+                <input type="text" class="form-control mb-2" [formControlName]="i" 
                     placeholder="Add an Answer">
             </div>
                 
@@ -24,7 +24,7 @@
         <div formGroupName="prerequisites" class="form-group py-3">
             <label> Are there any course requirements or prerequisites? </label>
             <div formArrayName="answer" *ngFor="let answerControl of targetYourStudents.get('prerequisites').get('answer')['controls']; let i=index">
-            <input type="text" class="form-control mb-2" [formControlName]="i" id="i" name="answer"
+            <input type="text" class="form-control mb-2" [formControlName]="i" 
                 placeholder="Add an Answer">
             </div>    
             <button type="button" name="addPrerequisites" id="addPrerequisites" (click)="addAnswerToPrerequisites()"class="btn btn-outline-primary text-decoration-none btn-sm border-0"><i
@@ -35,7 +35,7 @@
         <div formGroupName="target" class="form-group py-3">
             <label> Who are your target students?</label>
             <div formArrayName="answer" *ngFor="let answer of targetYourStudents.get('target').get('answer')['controls']; let i=index ">
-            <input type="text" class="form-control mb-2" [formControlName]="i" id="i" name="answer"
+            <input type="text" class="form-control mb-2" [formControlName]="i" 
                 placeholder="Add an Answer">
              </div>   
             <button type="button" name="addTarget" (click)="addAnswerToTarget()" id="addTarget" class="btn btn-outline-primary text-decoration-none btn-sm border-0"><i
