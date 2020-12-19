@@ -39,9 +39,19 @@ export class TargetYourStudentsComponent implements OnInit {
     (<FormArray>this.targetYourStudents.get('learn').get('answer')).push(control);
   }
 
+  removeAnswerToLearn(){
+    let targetYourStudentsArray=<FormArray>this.targetYourStudents.get('learn').get('answer');
+    targetYourStudentsArray.removeAt(targetYourStudentsArray.length - 1);
+  }
+
   addAnswerToPrerequisites(){
     const control=new FormControl("",Validators.required);
     (<FormArray>this.targetYourStudents.get('prerequisites').get('answer')).push(control);
+  }
+
+  removeAnswerToPrerequisites(){
+    let targetYourStudentsArray=<FormArray>this.targetYourStudents.get('prerequisites').get('answer');
+    targetYourStudentsArray.removeAt(targetYourStudentsArray.length - 1);
   }
 
 
@@ -49,6 +59,12 @@ export class TargetYourStudentsComponent implements OnInit {
     const control=new FormControl("",Validators.required);
     (<FormArray>this.targetYourStudents.get('target').get('answer')).push(control);
   }
+
+  removeAnswerToTarget(){
+    let targetYourStudentsArray=<FormArray>this.targetYourStudents.get('target').get('answer');
+    targetYourStudentsArray.removeAt(targetYourStudentsArray.length - 1);
+  }
+
 
 }
 

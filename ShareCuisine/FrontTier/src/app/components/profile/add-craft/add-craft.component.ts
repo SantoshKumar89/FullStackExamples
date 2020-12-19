@@ -18,6 +18,7 @@ export class AddCraftComponent implements OnInit {
     private craftForm:CraftFormService ) { }
 
   ngOnInit(): void {
+
     this.nav.show();
     this.route.queryParams.subscribe(params => {
       this.craftForm.currentCraftValue._id = this.route.snapshot.paramMap.get('craftId');
@@ -26,6 +27,7 @@ export class AddCraftComponent implements OnInit {
     this.craftService.getCraftById(this.craftForm.currentCraftValue._id).subscribe(res => {
       this.craftForm.currentCraftValue = res;
     })
+
 
   }
 

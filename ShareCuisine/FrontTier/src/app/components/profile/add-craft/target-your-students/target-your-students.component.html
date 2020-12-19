@@ -15,26 +15,35 @@
                 <input type="text" class="form-control mb-2" [formControlName]="i" id="i" name="answer"
                     placeholder="Add an Answer">
             </div>
-            <button type="button" name="add" id="add" class="btn btn-link my-2 text-decoration-none"
-                (click)="addAnswerToLearn()"><i class="fas fa-plus pr-1"></i> Add an Answer</button>
+             <div>   
+            <button type="button" name="add" id="add" class="btn btn-outline-primary text-decoration-none btn-sm border-0"
+                (click)="addAnswerToLearn()"><i class="fas fa-plus pr-1"></i> Add</button>
+            <button type="button" name="remove" id="remove" class="btn btn-outline-danger btn-sm float-right  border-0  text-decoration-none" [disabled]="(targetYourStudents.get('learn').get('answer')['controls'].length) === 1 ? true : false "
+                (click)="removeAnswerToLearn()"><i class="fas fa-minus"></i> Remove</button>    
+            </div>
         </div>
-        <div formGroupName="prerequisites" class="form-group">
+        <div formGroupName="prerequisites" class="form-group py-3">
             <label> Are there any course requirements or prerequisites? </label>
             <div formArrayName="answer" *ngFor="let answerControl of targetYourStudents.get('prerequisites').get('answer')['controls']; let i=index">
             <input type="text" class="form-control mb-2" [formControlName]="i" id="i" name="answer"
                 placeholder="Add an Answer">
             </div>    
-            <button type="button" name="add" id="add" (click)="addAnswerToPrerequisites()" class="btn btn-link my-2 text-decoration-none"><i
-                    class="fas fa-plus pr-1"></i> Add an Answer</button>
+            <button type="button" name="add" id="add" (click)="addAnswerToPrerequisites()"class="btn btn-outline-primary text-decoration-none btn-sm border-0"><i
+                    class="fas fa-plus pr-1"></i> Add</button>
+            <button type="button" name="remove" id="remove" class="btn btn-outline-danger btn-sm float-right  border-0  text-decoration-none" [disabled]="(targetYourStudents.get('prerequisites').get('answer')['controls'].length) === 1 ? true : false "
+                (click)="removeAnswerToPrerequisites()"><i class="fas fa-minus"></i> Remove</button>
         </div>
-        <div formGroupName="target" class="form-group">
+        <div formGroupName="target" class="form-group py-3">
             <label> Who are your target students?</label>
             <div formArrayName="answer" *ngFor="let answer of targetYourStudents.get('target').get('answer')['controls']; let i=index ">
             <input type="text" class="form-control mb-2" [formControlName]="i" id="i" name="answer"
                 placeholder="Add an Answer">
              </div>   
-            <button type="button" name="add" (click)="addAnswerToTarget()" id="add" class="btn btn-link my-2 text-decoration-none"><i
-                    class="fas fa-plus pr-1"></i> Add an Answer</button>
+            <button type="button" name="add" (click)="addAnswerToTarget()" id="add" class="btn btn-outline-primary text-decoration-none btn-sm border-0"><i
+                    class="fas fa-plus pr-1"></i> Add </button>
+        
+             <button type="button" name="remove" id="remove" class="btn btn-outline-danger btn-sm float-right  border-0  text-decoration-none" [disabled]="(targetYourStudents.get('target').get('answer')['controls'].length) === 1 ? true : false "
+                    (click)="removeAnswerToTarget()"><i class="fas fa-minus"></i> Remove</button>
         </div>
         <button type="submit" class="btn btn-success btn-block" [disabled]="!targetYourStudents.valid"> Save </button>
     </form>

@@ -24,4 +24,14 @@ export class CraftService {
     return this.http.get<Craft>(`${environment.apiUrl}/api/v1/craft/${_id}`)
   }
 
+
+  /** Get: Get Craft details from database */
+  updateCraftById(craft: Craft): Observable<Craft> {
+    return this.http.put<Craft>(`${environment.apiUrl}/api/v1/craft`,{
+      craft
+    })
+  }
+
+
+
 }

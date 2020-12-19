@@ -8,7 +8,7 @@ import { Craft } from 'src/app/models/craft';
 export class CraftFormService {
 
   private subject: BehaviorSubject<Craft>;
-  private craft: Observable<Craft>;
+  public craft: Observable<Craft>;
 
   constructor() {
     this.subject = new BehaviorSubject<Craft>(new Craft());
@@ -24,5 +24,6 @@ export class CraftFormService {
   public set currentCraftValue(craft: Craft) {
     this.subject.next(craft);
   }
+
 
 }
