@@ -24,13 +24,13 @@ const craftSchema = mongoose.Schema({
     },
     targetYourStudents: {
         learn: {
-            type: [String]
+            answer:{type: [String]}
         },
         prerequisites: {
-            type: [String]
+            answer:{type: [String]}
         },
-        targetStudents: {
-            type: [String]
+        target: {
+            answer:{type: [String]}
         }
     },
     curriculum: {

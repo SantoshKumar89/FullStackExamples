@@ -16,9 +16,9 @@
                     placeholder="Add an Answer">
             </div>
                 
-            <button type="button" name="add" id="add" class="btn btn-outline-primary text-decoration-none btn-sm border-0"
+            <button type="button" name="addLearn" id="addLearn" class="btn btn-outline-primary text-decoration-none btn-sm border-0"
                 (click)="addAnswerToLearn()"><i class="fas fa-plus pr-1"></i> Add</button>
-            <button type="button" name="remove" id="remove" class="btn btn-outline-danger btn-sm float-right  border-0  text-decoration-none" [disabled]="(targetYourStudents.get('learn').get('answer')['controls'].length) === 1 ? true : false "
+            <button type="button" name="removeLearn" id="removeLearn" class="btn btn-outline-danger btn-sm float-right  border-0  text-decoration-none" [disabled]="(targetYourStudents.get('learn').get('answer')['controls'].length) === 1 ? true : false "
                 (click)="removeAnswerToLearn()"><i class="fas fa-minus"></i> Remove</button>    
         </div>
         <div formGroupName="prerequisites" class="form-group py-3">
@@ -27,9 +27,9 @@
             <input type="text" class="form-control mb-2" [formControlName]="i" id="i" name="answer"
                 placeholder="Add an Answer">
             </div>    
-            <button type="button" name="add" id="add" (click)="addAnswerToPrerequisites()"class="btn btn-outline-primary text-decoration-none btn-sm border-0"><i
+            <button type="button" name="addPrerequisites" id="addPrerequisites" (click)="addAnswerToPrerequisites()"class="btn btn-outline-primary text-decoration-none btn-sm border-0"><i
                     class="fas fa-plus pr-1"></i> Add</button>
-            <button type="button" name="remove" id="remove" class="btn btn-outline-danger btn-sm float-right  border-0  text-decoration-none" [disabled]="(targetYourStudents.get('prerequisites').get('answer')['controls'].length) === 1 ? true : false "
+            <button type="button" name="removePrerequisites" id="removePrerequisites" class="btn btn-outline-danger btn-sm float-right  border-0  text-decoration-none" [disabled]="(targetYourStudents.get('prerequisites').get('answer')['controls'].length) === 1 ? true : false "
                 (click)="removeAnswerToPrerequisites()"><i class="fas fa-minus"></i> Remove</button>
         </div>
         <div formGroupName="target" class="form-group py-3">
@@ -38,10 +38,10 @@
             <input type="text" class="form-control mb-2" [formControlName]="i" id="i" name="answer"
                 placeholder="Add an Answer">
              </div>   
-            <button type="button" name="add" (click)="addAnswerToTarget()" id="add" class="btn btn-outline-primary text-decoration-none btn-sm border-0"><i
+            <button type="button" name="addTarget" (click)="addAnswerToTarget()" id="addTarget" class="btn btn-outline-primary text-decoration-none btn-sm border-0"><i
                     class="fas fa-plus pr-1"></i> Add </button>
         
-             <button type="button" name="remove" id="remove" class="btn btn-outline-danger btn-sm float-right  border-0  text-decoration-none" [disabled]="(targetYourStudents.get('target').get('answer')['controls'].length) === 1 ? true : false "
+             <button type="button" name="removeTarget" id="removeTarget" class="btn btn-outline-danger btn-sm float-right  border-0  text-decoration-none" [disabled]="(targetYourStudents.get('target').get('answer')['controls'].length) === 1 ? true : false "
                     (click)="removeAnswerToTarget()"><i class="fas fa-minus"></i> Remove</button>
         </div>
         <button type="submit" (submit)="save()" class="btn btn-success btn-block" [disabled]="!targetYourStudents.valid"> Save </button>

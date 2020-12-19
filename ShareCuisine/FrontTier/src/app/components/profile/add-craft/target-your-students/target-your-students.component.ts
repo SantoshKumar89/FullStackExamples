@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl ,FormArray, Validators} from '@angular/forms';
+import { FormGroup, FormControl, FormArray, Validators, AbstractControl } from '@angular/forms';
 import { CraftFormService } from '../craft-form.service'
+import { CraftService } from '../../../../services/craft.service';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-target-your-students',
@@ -10,61 +12,93 @@ import { CraftFormService } from '../craft-form.service'
 export class TargetYourStudentsComponent implements OnInit {
 
 
-  targetYourStudents:FormGroup;
+  targetYourStudents: FormGroup;
 
 
-  constructor(private craftForm: CraftFormService) { }
+  constructor(private craftForm: CraftFormService,private craftService:CraftService) { }
 
   ngOnInit(): void {
 
     this.craftForm.craft.subscribe(res => {
-    this.targetYourStudents = new FormGroup({
-      'learn': new FormGroup({
-        'answer': new FormArray([new FormControl("")])
-      }),
-      'prerequisites': new FormGroup({
-        'answer': new FormArray([new FormControl("")])
-      }),
-      'target': new FormGroup({
-        'answer': new FormArray([new FormControl("")])
+
+      let learnFormControl: [AbstractControl]=[new FormControl("")];
+      let prerequisitesFormControl: [AbstractControl]=[new FormControl("")];
+      let targetFormControl: [AbstractControl]=[new FormControl("")];
+
+      if(res.targetYourStudents != undefined && res.targetYourStudents.learn != undefined){
+        learnFormControl.pop();
+        res.targetYourStudents.learn.answer.forEach(element => {
+          learnFormControl.push(new FormControl(element))
+        });
+      }
+      if(res.targetYourStudents != undefined && res.targetYourStudents.prerequisites != undefined){
+        prerequisitesFormControl.pop();
+
+        res.targetYourStudents.prerequisites.answer.forEach(element =>{
+          prerequisitesFormControl.push(new FormControl(element));
+        })       
+      }
+
+      if(res.targetYourStudents != undefined && res.targetYourStudents.target != undefined){
+        targetFormControl.pop();
+
+        res.targetYourStudents.target.answer.forEach(element => {
+          targetFormControl.push(new FormControl(element))
+        })
+      }
+      
+
+      this.targetYourStudents = new FormGroup({
+        'learn': new FormGroup({
+          'answer': new FormArray(learnFormControl)
+        }),
+        'prerequisites': new FormGroup({
+          'answer': new FormArray(prerequisitesFormControl)
+        }),
+        'target': new FormGroup({
+          'answer': new FormArray(targetFormControl)
+        })
       })
-    })})
+    })
   }
 
-  save(){
-
-    console.log(JSON.stringify(this.targetYourStudents.value));
+  save() {
+    console.log(this.targetYourStudents.value);
+    this.craftForm.currentCraftValue.targetYourStudents = this.targetYourStudents.value;
+    this.craftService.updateCraftById(this.craftForm.currentCraftValue).subscribe(res => {
+      console.log("updated successfully");
+    })
 
   }
 
-  addAnswerToLearn(){
-    const control=new FormControl("",Validators.required);
+  addAnswerToLearn() {
+    const control = new FormControl("", Validators.required);
     (<FormArray>this.targetYourStudents.get('learn').get('answer')).push(control);
   }
 
-  removeAnswerToLearn(){
-    let targetYourStudentsArray=<FormArray>this.targetYourStudents.get('learn').get('answer');
+  removeAnswerToLearn() {
+    let targetYourStudentsArray = <FormArray>this.targetYourStudents.get('learn').get('answer');
     targetYourStudentsArray.removeAt(targetYourStudentsArray.length - 1);
   }
 
-  addAnswerToPrerequisites(){
-    const control=new FormControl("",Validators.required);
+  addAnswerToPrerequisites() {
+    const control = new FormControl("", Validators.required);
     (<FormArray>this.targetYourStudents.get('prerequisites').get('answer')).push(control);
   }
 
-  removeAnswerToPrerequisites(){
-    let targetYourStudentsArray=<FormArray>this.targetYourStudents.get('prerequisites').get('answer');
+  removeAnswerToPrerequisites() {
+    let targetYourStudentsArray = <FormArray>this.targetYourStudents.get('prerequisites').get('answer');
     targetYourStudentsArray.removeAt(targetYourStudentsArray.length - 1);
   }
 
 
-  addAnswerToTarget(){
-    const control=new FormControl("",Validators.required);
+  addAnswerToTarget() {
+    const control = new FormControl("", Validators.required);
     (<FormArray>this.targetYourStudents.get('target').get('answer')).push(control);
   }
 
-  removeAnswerToTarget(){
-    let targetYourStudentsArray=<FormArray>this.targetYourStudents.get('target').get('answer');
+  removeAnswerToTarget() {
+    let targetYourStudentsArray = <FormArray>this.targetYourStudents.get('target').get('answer');
     targetYourStudentsArray.removeAt(targetYourStudentsArray.length - 1);
   }
 
