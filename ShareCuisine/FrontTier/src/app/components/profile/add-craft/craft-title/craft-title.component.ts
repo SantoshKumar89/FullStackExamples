@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { CraftService } from '../../../../services/craft.service';
+import { CraftFormService } from '../craft-form.service'
+
 
 @Component({
   selector: 'app-craft-title',
@@ -9,19 +12,19 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class CraftTitleComponent implements OnInit {
 
   titleForm:FormGroup;
-
-  constructor() { }
+ 
+  constructor(private craftService: CraftService,
+    private craftForm:CraftFormService) { }
 
   ngOnInit(): void {
 
-
-    this.titleForm= new FormGroup({
-      'title': new FormControl("New Craft",Validators.required)
+    this.titleForm= new FormGroup({      
+      'title': new FormControl(this.craftForm.currentCraftValue.title,Validators.required)
     });
 
   }
 
   save(){
-
+    
   }
 }

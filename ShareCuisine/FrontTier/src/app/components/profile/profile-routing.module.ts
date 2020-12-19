@@ -5,9 +5,9 @@ import { ProfileComponent } from './profile.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { AddCraftComponent } from './add-craft/add-craft.component';
 
-const routes: Routes = [{ path: ':id', component: ProfileComponent },
-{ path: ':id/editProfile', component: EditProfileComponent },
-{ path: ':id/craft', component: AddCraftComponent }
+const routes: Routes = [{ path: ':profileId', component: ProfileComponent },
+{ path: ':profileId/editProfile', component: EditProfileComponent },
+{ path: ':profileId/craft/:craftId', component: AddCraftComponent }
 
 ];
 

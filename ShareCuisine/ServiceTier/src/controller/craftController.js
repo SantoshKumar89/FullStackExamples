@@ -4,10 +4,9 @@ const craft = require("../model/craft")
 //Create Craft object
 craftRouter.post("/", async function (req, res) {
     
-    console.log(req.headers.userid);
-    craft.create({ title: 'New Craft', createdBy : req.headers.userid }, function (err, data) {
+    craft.create({ title: 'New Craft 2', createdBy : req.body.craft.createdBy }, function (err, data) {
         if (err) {console.log(err)};
-        res.send({data});
+        res.send(data);
       });
 
 });
@@ -17,7 +16,7 @@ craftRouter.put("/", async function (req, res) {
     
     craft.findOneAndUpdate({_id:req.body._id, createdBy : req.headers.userid},req.body, function (err, data) {
         if (err) {console.log(err)};
-        res.send({data});
+        res.send(data);
       });
 
 });
@@ -27,7 +26,7 @@ craftRouter.get("/", async function (req, res) {
 
     craft.find(function (err, data) {
         if (err) {console.log(err)};
-        res.send({data});
+        res.send(data);
       });
 
 });
@@ -36,7 +35,7 @@ craftRouter.get("/", async function (req, res) {
 craftRouter.get("/:id", async function (req, res) {
     craft.findById(req.params.id, function (err, data) {
         if (err) {console.log(err)};
-        res.send({data});
+        res.send(data);
       });
 
 });
