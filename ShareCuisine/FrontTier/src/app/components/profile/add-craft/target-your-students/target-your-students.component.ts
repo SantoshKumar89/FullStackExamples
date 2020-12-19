@@ -66,7 +66,6 @@ export class TargetYourStudentsComponent implements OnInit {
     console.log(this.targetYourStudents.value);
     this.craftForm.currentCraftValue.targetYourStudents = this.targetYourStudents.value;
     this.craftService.updateCraftById(this.craftForm.currentCraftValue).subscribe(res => {
-      console.log("updated successfully");
     })
 
   }
