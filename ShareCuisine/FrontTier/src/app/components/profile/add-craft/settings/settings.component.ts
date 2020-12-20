@@ -19,7 +19,7 @@ export class SettingsComponent implements OnInit {
   enrollmentValues: Enrollment[];
   helperText: string;
   showPassword: boolean = false;
-  privateWithPswConst='privateWithPsw';
+  privateWithPswConst = 'privateWithPsw';
 
 
   constructor(private craftForm: CraftFormService, private masterService: MasterService, private craftService: CraftService) { }
@@ -28,7 +28,7 @@ export class SettingsComponent implements OnInit {
   ngOnInit(): void {
 
     this.masterService.getEnrollment().subscribe(res => {
-      this.enrollmentValues = res;      
+      this.enrollmentValues = res;
     })
 
     this.craftForm.craft.subscribe(res => {
@@ -36,10 +36,12 @@ export class SettingsComponent implements OnInit {
       let optionControl = res.settings != undefined ? new FormControl(res.settings.enrollment.option._id) : new FormControl("");
       let passwordControl = res.settings != undefined ? new FormControl(res.settings.enrollment.password) : new FormControl("");
 
-      this.helperText = res.settings.enrollment.option.helperText;
+      if (res.settings !== undefined) {
+        this.helperText = res.settings.enrollment.option.helperText;
+      }
 
-      if(res.settings !=undefined && res.settings.enrollment.option.name == this.privateWithPswConst){
-        this.showPassword=true;
+      if (res.settings != undefined && res.settings.enrollment.option.name == this.privateWithPswConst) {
+        this.showPassword = true;
       }
 
       this.enrollmentForm = new FormGroup({
@@ -70,11 +72,11 @@ export class SettingsComponent implements OnInit {
     this.craftService.updateCraftById(this.craftForm.currentCraftValue).subscribe(res => {
       console.log("updated");
     });
-    
+
   }
 
   helper() {
-    
+
     const result = this.enrollmentValues.filter(enrollValues => (enrollValues.name == this.privateWithPswConst))
     if (result[0]._id == this.enrollmentForm.get('option').value) {
       this.showPassword = true;

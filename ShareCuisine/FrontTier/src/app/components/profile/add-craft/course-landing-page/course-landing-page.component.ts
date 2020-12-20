@@ -31,8 +31,8 @@ export class CourseLandingPageComponent implements OnInit {
 
     this.craftForm.craft.subscribe(res => {
 
-    const languageSelection = res.courseLandingPage.basicInfo.language!= undefined ? new FormControl(res.courseLandingPage.basicInfo.language):new FormControl("");
-    const levelSelection = res.courseLandingPage.basicInfo.level!= undefined ? new FormControl(res.courseLandingPage.basicInfo.level):new FormControl("");
+    const languageSelection = res.courseLandingPage.basicInfo.language!= undefined ? new FormControl(res.courseLandingPage.basicInfo.language._id):new FormControl("");
+    const levelSelection = res.courseLandingPage.basicInfo.level!= undefined ? new FormControl(res.courseLandingPage.basicInfo.level._id):new FormControl("");
 
     this.landingPageForm=new FormGroup({
       'courseTitle': new FormControl(res.courseLandingPage.courseTitle),
