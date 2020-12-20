@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Language } from 'src/app/models/language';
 import { Level } from 'src/app/models/level';
+import { MasterService } from 'src/app/services/master.service';
+import { CraftService } from '../../../../services/craft.service';
+import { CraftFormService } from '../craft-form.service'
 
 @Component({
   selector: 'app-course-landing-page',
@@ -11,29 +14,59 @@ import { Level } from 'src/app/models/level';
 export class CourseLandingPageComponent implements OnInit {
 
   landingPageForm:FormGroup;
-  languages:Language[] = [{locale:'en_US',name:"English (US)"},{locale:'en_UK',name:"English (UK)"},{locale:'en_IN',name:"English (India)"}];
-  levels: Level[] = [{name:'beginner',value:'Beginner Level'},{name:'intermediate',value:'Intermediate Level'},{name:'expert',value:'Expert Level'},{name:'all',value:'All Level'}]
-  constructor() { }
+  languages:Language[];
+  levels: Level[];
+  
+  constructor(private craftForm: CraftFormService,private masterService:MasterService,private craftService:CraftService) { }
 
   ngOnInit(): void {
 
-    this.landingPageForm=new FormGroup({
-      'courseTitle': new FormControl("courseTitle"),
-      'courseSubtitle': new FormControl("courseSubtitle"),
-      'courseDescription': new FormControl("courseDescription"),
-      'basicInfo': new FormGroup({
-      'language': new FormControl(""),
-      'level': new FormControl("")
-      }),
-      'courseImage': new FormControl(""),
-      'promotionalVideo': new FormControl("")
+    this.masterService.getLanguage().subscribe(res => {
+      this.languages=res;
     })
+
+    this.masterService.getLevel().subscribe(res => {
+      this.levels=res;
+    })
+
+    this.craftForm.craft.subscribe(res => {
+
+    const languageSelection = res.courseLandingPage.basicInfo.language!= undefined ? new FormControl(res.courseLandingPage.basicInfo.language):new FormControl("");
+    const levelSelection = res.courseLandingPage.basicInfo.level!= undefined ? new FormControl(res.courseLandingPage.basicInfo.level):new FormControl("");
+
+    this.landingPageForm=new FormGroup({
+      'courseTitle': new FormControl(res.courseLandingPage.courseTitle),
+      'courseSubtitle': new FormControl(res.courseLandingPage.courseSubtitle),
+      'courseDescription': new FormControl(res.courseLandingPage.courseDescription),
+      'basicInfo': new FormGroup({
+      'language': languageSelection,
+      'level': levelSelection
+      }),
+      'courseImage': new FormControl(res.courseLandingPage.courseImage),
+      'promotionalVideo': new FormControl(res.courseLandingPage.promotionalVideo)
+    })
+  
+
+  
+  
+  }
+    
+    
+    )
+    
+    
+
   }
 
   save(){
 
-    console.log("hi"+
-    JSON.stringify(this.landingPageForm.value));
+    this.craftForm.currentCraftValue.courseLandingPage=this.landingPageForm.value;
+
+    this.craftService.updateCraftById(this.craftForm.currentCraftValue).subscribe(res=>{
+      console.log("updated");
+    });
+
+
   }
 
 }

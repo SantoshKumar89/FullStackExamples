@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
+import { FormGroup, FormControl, FormArray, Validators, RequiredValidator } from '@angular/forms';
 import { Enrollment } from 'src/app/models/enrollment';
+import { MasterService } from 'src/app/services/master.service';
+import { CraftService } from '../../../../services/craft.service';
+import { CraftFormService } from '../craft-form.service'
+
 
 @Component({
   selector: 'app-settings',
@@ -12,46 +16,74 @@ export class SettingsComponent implements OnInit {
 
   enrollmentForm: FormGroup;
   certificatesForm: FormGroup;
-
-
-  enrollmentValues: Enrollment[] = [{ name: "public", value: "Public", helperText: "Public courses are public to all users within Cisco Udemy for Business Portal. They show up in search results and are available for anyone to take inside Cisco Udemy for Business Portal." },
-  { name: "private", value: "Private (Invitation Only)", helperText: "If a course's enrollment page is invitation only, the course won't show up in search results on Cisco Udemy for Business Portal. Accept new student requests and send invitations from the 'Students' page found under 'Course Management' in the left navigation." }, { name: "privateWithPsw", value: "Private (Password Protected)", helperText: "If a course's enrollment page is password protected, the course won't show up in search results on Cisco Udemy for Business Portal. Instead, share the course URL and password directly with students you want to enroll. Keep in mind this provides only a low level of security. Students could share your course URL with an embedded password." }]
-
-
+  enrollmentValues: Enrollment[];
   helperText: string;
-  constructor() {
-  }
+  showPassword: boolean = false;
+  privateWithPswConst='privateWithPsw';
+
+
+  constructor(private craftForm: CraftFormService, private masterService: MasterService, private craftService: CraftService) { }
+
 
   ngOnInit(): void {
 
-    this.enrollmentForm = new FormGroup({
-      'enroll': new FormControl(""),
-      'password': new FormArray([])
+    this.masterService.getEnrollment().subscribe(res => {
+      this.enrollmentValues = res;      
     })
 
-    this.certificatesForm=new FormGroup({
-      'enableCertificate': new FormControl()
+    this.craftForm.craft.subscribe(res => {
+
+      let optionControl = res.settings != undefined ? new FormControl(res.settings.enrollment.option._id) : new FormControl("");
+      let passwordControl = res.settings != undefined ? new FormControl(res.settings.enrollment.password) : new FormControl("");
+
+      this.helperText = res.settings.enrollment.option.helperText;
+
+      if(res.settings !=undefined && res.settings.enrollment.option.name == this.privateWithPswConst){
+        this.showPassword=true;
+      }
+
+      this.enrollmentForm = new FormGroup({
+        'option': optionControl,
+        'password': passwordControl
+      })
+
+
+      this.certificatesForm = new FormGroup({
+        'enableCertificate': new FormControl(res.enableCertificate)
+      })
+
     })
+
   }
 
   saveEnrollmentForm() {
-    console.log(this.enrollmentForm.value);
+    this.craftForm.currentCraftValue.settings = { enrollment: this.enrollmentForm.value };
+    this.craftService.updateCraftById(this.craftForm.currentCraftValue).subscribe(res => {
+      console.log("updated");
+    });
   }
 
-  saveCertificatesForm(){
+  saveCertificatesForm() {
+
     console.log(this.certificatesForm.value);
+    this.craftForm.currentCraftValue.enableCertificate = this.certificatesForm.value.enableCertificate;
+    this.craftService.updateCraftById(this.craftForm.currentCraftValue).subscribe(res => {
+      console.log("updated");
+    });
+    
   }
 
   helper() {
-    this.helperText = this.enrollmentForm.get('enroll').value.helperText;
-    if (this.enrollmentForm.get('enroll').value.name == "privateWithPsw") {
-      (<FormArray>this.enrollmentForm.get('password')).push(new FormControl("", Validators.required));
+    
+    const result = this.enrollmentValues.filter(enrollValues => (enrollValues.name == this.privateWithPswConst))
+    if (result[0]._id == this.enrollmentForm.get('option').value) {
+      this.showPassword = true;
     } else {
-      const passwordArray = <FormArray>this.enrollmentForm.get('password');
-      if (passwordArray.length > 0) {
-        passwordArray.removeAt(passwordArray.length - 1)
-      }
+      this.showPassword = false;
+      this.enrollmentForm.get('password').setValue("");//reset password
     }
+
+    this.helperText = this.enrollmentValues.filter(enrollValues => (enrollValues._id == this.enrollmentForm.get('option').value))[0].helperText;
 
   }
 

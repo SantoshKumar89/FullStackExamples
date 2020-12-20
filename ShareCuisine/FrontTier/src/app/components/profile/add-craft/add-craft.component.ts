@@ -12,6 +12,9 @@ import { CraftFormService } from './craft-form.service'
 })
 export class AddCraftComponent implements OnInit {
 
+  public craftCreated; boolean=false;
+
+
   constructor(private nav: NavbarServiceService,
     private craftService: CraftService,
     private route: ActivatedRoute,
@@ -26,6 +29,7 @@ export class AddCraftComponent implements OnInit {
 
     this.craftService.getCraftById(this.craftForm.currentCraftValue._id).subscribe(res => {
       this.craftForm.currentCraftValue = res;
+      this.craftCreated=true;
     })
 
 

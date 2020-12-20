@@ -10,5 +10,9 @@ router.use("/login",require("../controller/loginController"));
 router.use("/craft",require("../controller/craftController"));
 
 
+// Set master data routes
+router.use("/master",require("../controller/masterController"));
+
+
 // Export API routes
 module.exports = router;

@@ -38,41 +38,45 @@ const craftSchema = mongoose.Schema({
     },
     courseLandingPage: {
         courseTitle: {
-            type: String
+            type: String,
+            default:""
         },
         courseSubtitle: {
-            type: String
+            type: String,
+            default:""
         },
         courseDescription: {
-            type: String
+            type: String,
+            default:""
         },
         basicInfo: {
             language: {
-                type: Schema.Types.ObjectId, ref: 'Language'
+                type: Schema.Types.ObjectId, ref: 'language',
+                default:null
             },
             level: {
-                type: Schema.Types.ObjectId, ref: 'Level'
+                type: Schema.Types.ObjectId, ref: 'level',
+                default:null
             }
-
+        },courseImage: {
+            type: String,
+            default:""
+        },
+        promotionalVideo: {
+            type: String,
+            default:""
         }
     },
-    courseImage: {
-        type: String
-    },
-    promotionalVideo: {
-        type: String
-    },
-
     settings: {
         enrollment: {
             option: {
-                type: String
+                type: Schema.Types.ObjectId, ref: 'enrollment'
             },
             password: {
-                type: String
+                type: String,
+               
             }
         }
-
     }
 }, {
     versionKey: false

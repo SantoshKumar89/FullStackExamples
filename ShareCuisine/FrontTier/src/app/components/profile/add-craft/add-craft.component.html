@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="craftCreated">
     <div class="row">
         <div class="col-3">
             <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -21,17 +21,17 @@
         </div>
         <div class="col-9">
             <div class="tab-content tab-custom p-4" id="v-pills-tabContent">
-                <div class="tab-pane fade  " id="v-pills-title" role="tabpanel"
+                <div class="tab-pane fade show active  " id="v-pills-title" role="tabpanel"
                     aria-labelledby="v-pills-title-tab">
                     <app-craft-title></app-craft-title>
                 </div>
-                <div class="tab-pane fade show active" id="v-pills-tys" role="tabpanel" aria-labelledby="v-pills-tys-tab">
+                <div class="tab-pane fade  " id="v-pills-tys" role="tabpanel" aria-labelledby="v-pills-tys-tab">
                     <app-target-your-students></app-target-your-students>
                 </div>
                 <div class="tab-pane fade " id="v-pills-curriculum" role="tabpanel" aria-labelledby="v-pills-curriculum-tab">
                     <app-curriculum></app-curriculum>
                 </div>
-                <div class="tab-pane fade" id="v-pills-clp" role="tabpanel" aria-labelledby="v-pills-clp-tab">
+                <div class="tab-pane fade " id="v-pills-clp" role="tabpanel" aria-labelledby="v-pills-clp-tab">
                 <app-course-landing-page></app-course-landing-page>
                 </div>
                 <div class="tab-pane fade" id="v-pills-captions" role="tabpanel" aria-labelledby="v-pills-captions-tab">

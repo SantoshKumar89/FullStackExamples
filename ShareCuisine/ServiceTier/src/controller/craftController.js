@@ -13,6 +13,7 @@ craftRouter.post("/", async function (req, res) {
 
 //Update Craft object
 craftRouter.put("/", async function (req, res) {
+  console.log(req.body);
     craft.findOneAndUpdate({_id:req.body.craft._id, createdBy : req.body.craft.createdBy},req.body.craft, function (err, data) {
         if (err) {console.log(err)};
         res.send(data);
@@ -23,19 +24,14 @@ craftRouter.put("/", async function (req, res) {
 //Get All Craft objects
 craftRouter.get("/", async function (req, res) {
 
-    craft.find(function (err, data) {
-        if (err) {console.log(err)};
-        res.send(data);
-      });
-
+    const data=await craft.find().populate(['courseLandingPage.basicInfo.language','courseLandingPage.basicInfo.level','settings.enrollment.option']);
+    res.send(data);
 });
 
 //Get Craft By Id object
 craftRouter.get("/:id", async function (req, res) {
-    craft.findById(req.params.id, function (err, data) {
-        if (err) {console.log(err)};
-        res.send(data);
-      });
+    const data=await craft.find({_id:req.params.id}).populate(['courseLandingPage.basicInfo.language','courseLandingPage.basicInfo.level','settings.enrollment.option']);
+    res.send(data[0]);
 
 });
 

@@ -52,15 +52,13 @@
         <label>
             Enrollment (Privacy)
         </label>
-        <select class="form-control" (change)="helper()" formControlName="enroll">
+        <select class="form-control" (change)="helper()" formControlName="option">
             <option value="" disabled>Choose an Option</option>
-            <option *ngFor="let value of enrollmentValues" id="value" [ngValue]="value">{{value.value}}
+            <option *ngFor="let value of enrollmentValues" id="value" [ngValue]="value._id">{{value.value}}
             </option>
         </select>
-        <div formArrayName="password" *ngFor="let password of enrollmentForm.get('password')['controls']; let i=index;">
-            <input type="password" class="form-control mt-3"  [formControlName]="i" id="i" placeholder="Password" name="password" 
+        <input type="password" class="form-control mt-3"  formControlName="password" id="password" placeholder="Password" name="password" *ngIf="showPassword"
             aria-label="Full Name">
-        </div>                
         <p class="text-muted mt-3">{{helperText}}</p>
     </div>
     <button type="submit" class="btn btn-success" [disabled]="!enrollmentForm.get('password').valid">Save</button>
