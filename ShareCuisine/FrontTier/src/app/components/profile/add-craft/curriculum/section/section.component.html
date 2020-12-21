@@ -11,12 +11,13 @@
         </div>
       </th>
     </tr>
-    <tr>
+
+    <tr *ngFor="let content of contents; let i=index;">
       <td class="align-middle ">
         <input type="checkbox">
       </td>
       <td>
-        <div class="card card-body">
+        <div class="card card-body" id="i" name="i" >
           <h5 class="card-text">Introduction</h5>
           <hr>
           <div>
@@ -33,6 +34,6 @@
     </tr>
   </table>
   <div class="text-center">
-    <button type="button" class="btn btn-outline-primary btn-sm"><i class="fas fa-plus pr-1"></i>
+    <button type="button" class="btn btn-outline-primary btn-sm" (click)="addContent()"><i class="fas fa-plus pr-1"></i>
       Content</button>
   </div>

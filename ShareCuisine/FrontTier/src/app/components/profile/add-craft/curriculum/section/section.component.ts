@@ -7,9 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SectionComponent implements OnInit {
 
+  contents = [{}];
+
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  addContent(){
+    console.log("hi")
+    this.contents.push(this.contents.length);
   }
 
 }

@@ -7,17 +7,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CurriculumComponent implements OnInit {
 
+  sections = [{}];
+
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
   addSection(){
+  this.sections.push(this.sections.length);
 
   }
 
   preview(){
-    
+
   }
 
 }
