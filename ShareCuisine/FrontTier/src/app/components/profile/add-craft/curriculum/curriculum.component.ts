@@ -12,4 +12,12 @@ export class CurriculumComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  addSection(){
+
+  }
+
+  preview(){
+    
+  }
+
 }

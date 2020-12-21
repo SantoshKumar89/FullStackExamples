@@ -18,10 +18,12 @@ import { CourseLandingPageComponent } from './add-craft/course-landing-page/cour
 import { CaptionsComponent } from './add-craft/captions/captions.component';
 import { StudentsComponent } from './add-craft/students/students.component';
 import { SettingsComponent } from './add-craft/settings/settings.component';
+import { SectionComponent } from './add-craft/curriculum/section/section.component';
+import { ContentComponent } from './add-craft/curriculum/content/content.component';
 
 
 @NgModule({
-  declarations: [ProfileComponent, MyCraftsComponent, SavedCraftsComponent, EditProfileComponent, GeneralComponent, PreferenceComponent, ActivityComponent, AddCraftComponent, CraftTitleComponent, TargetYourStudentsComponent, CurriculumComponent, CourseLandingPageComponent, CaptionsComponent, StudentsComponent, SettingsComponent],
+  declarations: [ProfileComponent, MyCraftsComponent, SavedCraftsComponent, EditProfileComponent, GeneralComponent, PreferenceComponent, ActivityComponent, AddCraftComponent, CraftTitleComponent, TargetYourStudentsComponent, CurriculumComponent, CourseLandingPageComponent, CaptionsComponent, StudentsComponent, SettingsComponent, SectionComponent, ContentComponent],
   imports: [
     CommonModule,
     ProfileRoutingModule,
