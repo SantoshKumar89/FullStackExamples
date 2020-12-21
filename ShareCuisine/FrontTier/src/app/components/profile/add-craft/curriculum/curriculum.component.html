@@ -6,7 +6,7 @@
 
 <!--Section Start-->
 <div id="sections" class="pb-3" *ngFor="let section of sections; let i=index;">
-  <app-section id="i" name="i"></app-section>      
+  <app-section id="{{i}}" name="section" [sectionId]="i" (deleteSectionEvent)="deleteSection($event)"></app-section>      
 </div>
 <!--Section End-->
 

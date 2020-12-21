@@ -2,7 +2,23 @@ import { Language } from './language';
 import { Level } from './level';
 import { Enrollment } from './enrollment';
 
+class Content{
 
+
+
+}
+
+class Section{
+
+    public contents:[Content]
+}
+
+class Curriculum{
+
+
+    public sections:[Section]
+
+}
 
 class TargetYourStudents {
 

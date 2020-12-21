@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Output, EventEmitter } from '@angular/core'; 
+
 
 @Component({
   selector: 'app-section',
@@ -9,6 +11,11 @@ export class SectionComponent implements OnInit {
 
   contents = [{}];
 
+  @Output() deleteSectionEvent = new EventEmitter<number>();
+  @Input() sectionId: number;
+  
+
+  
 
   constructor() { }
 
@@ -16,8 +23,10 @@ export class SectionComponent implements OnInit {
   }
 
   addContent(){
-    console.log("hi")
     this.contents.push(this.contents.length);
   }
 
+  deleteSection(){
+    this.deleteSectionEvent.emit(this.sectionId);
+  }
 }
