@@ -9,7 +9,7 @@ const craftSchema = mongoose.Schema({
     createdDate: {
         type: Date,
         default: Date.now
-      },
+    },
     publish: {
         type: Boolean,
         default: false
@@ -24,47 +24,63 @@ const craftSchema = mongoose.Schema({
     },
     targetYourStudents: {
         learn: {
-            answer:{type: [String], default:[""]}
+            answer: { type: [String], default: [""] }
         },
         prerequisites: {
-            answer:{type: [String],default:[""]}
+            answer: { type: [String], default: [""] }
         },
         target: {
-            answer:{type: [String],default:[""]}
+            answer: { type: [String], default: [""] }
         }
     },
     curriculum: {
+        sections: [
+            {
+                title: { type: String },
+                contents: [{
+                    title: { type: String },
+                    content: {
+                        embed: {
+                            url: { type: String }
+                        }, upload: {
 
+                        }
+                    },
+                    description: { type: String },
+                    resources: { type: [String] }
+
+                }]
+            }]
     },
     courseLandingPage: {
         courseTitle: {
             type: String,
-            default:""
+            default: ""
         },
         courseSubtitle: {
             type: String,
-            default:""
+            default: ""
         },
         courseDescription: {
             type: String,
-            default:""
+            default: ""
         },
         basicInfo: {
             language: {
                 type: Schema.Types.ObjectId, ref: 'language',
-                default:null
+                default: null
             },
             level: {
                 type: Schema.Types.ObjectId, ref: 'level',
-                default:null
+                default: null
             }
-        },courseImage: {
+        }, courseImage: {
             type: String,
-            default:""
+            default: ""
         },
         promotionalVideo: {
             type: String,
-            default:""
+            default: ""
         }
     },
     settings: {
@@ -74,7 +90,7 @@ const craftSchema = mongoose.Schema({
             },
             password: {
                 type: String,
-               
+
             }
         }
     }

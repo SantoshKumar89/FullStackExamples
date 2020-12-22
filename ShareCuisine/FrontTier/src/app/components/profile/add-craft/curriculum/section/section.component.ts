@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Output, EventEmitter } from '@angular/core'; 
+import { Content } from '../../../../../models/craft'
 
 
 @Component({
@@ -7,23 +8,25 @@ import { Output, EventEmitter } from '@angular/core';
   templateUrl: './section.component.html',
   styleUrls: ['./section.component.scss']
 })
-export class SectionComponent implements OnInit {
+export class SectionComponent implements OnInit{
+ 
 
-  contents = [{}];
+  contents:[Content] = [new Content()];
 
   @Output() deleteSectionEvent = new EventEmitter<number>();
   @Input() sectionId: number;
   
 
   
-
   constructor() { }
 
   ngOnInit(): void {
+
+    
   }
 
   addContent(){
-    this.contents.push(this.contents.length);
+    this.contents.push(new Content());
   }
 
   deleteSection(){

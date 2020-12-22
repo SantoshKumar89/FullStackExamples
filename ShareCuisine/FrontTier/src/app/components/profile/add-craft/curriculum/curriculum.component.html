@@ -1,15 +1,105 @@
 <h4 class="font-weight-light inline">Curriculum</h4>
-<button type="button" class="float-right btn btn-success"> <i class="fas fa-play"></i> Preview</button>
+<button type="button" class="float-right btn btn-success" (click)="showData()"> <i class="fas fa-play"></i> Preview</button>
 
 <button type="button" class="float-right btn btn-primary mx-2" (click)="addSection()"> <i class="fas fa-plus"></i> Section</button>
 <hr>
 
 <!--Section Start-->
 <div id="sections" class="pb-3" *ngFor="let section of sections; let i=index;">
-  <app-section id="{{i}}" name="section" [sectionId]="i" (deleteSectionEvent)="deleteSection($event)"></app-section>      
+  <table class="table table-borderless">
+    <tr>
+      <th>
+      </th>
+      <th>
+        <div class="card w-100">
+          <h5 class="card-header">Section 1
+            <button class="btn p-0 m-0 float-right" (click)=deleteSection(i)> <span style=" color: Tomato;">
+                <i class="fas fa-trash-alt  color: Tomato;"></i></span></button>
+          </h5>
+        </div>
+      </th>
+    </tr>
+    <tr *ngFor="let content of section.contents; let j=index;">
+      <td class="align-middle ">
+        <button class="btn p-0 m-0" (click)=deleteContent(i,j)> <span style=" color: Tomato;">
+          <i class="fas fa-trash-alt  color: Tomato;"></i></span></button>
+      </td>
+      <td>
+        <div class="card card-body" id="j" name="j" >
+          <h5 class="card-text">Introduction</h5>
+          <hr>
+          <div>
+            <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal"
+              data-target="#exampleModal">
+              <i class="fas fa-plus pr-1"></i>
+              Details
+            </button>
+            <button type="button" class="btn btn-outline-success btn-sm mx-2 float-right"> <i class="fas fa-play"></i>
+              Preview</button>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </table>
+  <div class="text-center">
+    <button type="button" class="btn btn-outline-primary btn-sm" (click)="addContent(section)"><i class="fas fa-plus pr-1"></i>
+      Content</button>
+  </div>
 </div>
 <!--Section End-->
 
 
 <!-- Modal -->
-<app-content></app-content>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Introduction</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label class="mr-4">Content</label><br>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"
+                checked>
+              <label class="form-check-label" for="inlineRadio1">Embed</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"
+                disabled>
+              <label class="form-check-label" for="inlineRadio2">Upload</label>
+            </div>
+
+            <input class="form-control mt-3" type="text" placeholder="Eg: https://youtu.be/4oTfQoj_Jrc">
+
+          </div>
+        </form>
+        <hr>
+        <form>
+          <div class="form-group">
+            <label>Description</label>
+            <textarea class="form-control" id="w3review" name="w3review" rows="4" cols="50"> </textarea>
+          </div>
+        </form>
+        <hr>
+        <form>
+          <div class="form-group">
+            <label>Resources</label>
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="customFile">
+              <label class="custom-file-label" for="customFile">Choose file</label>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -2,21 +2,30 @@ import { Language } from './language';
 import { Level } from './level';
 import { Enrollment } from './enrollment';
 
-class Content{
+export class Content {
+        title: string;
+        content: {
+            embed: {
+                url: string
+            },
+            upload: {
 
-
+            }
+        };
+        description: string;
+        resources: { type: [string] };
 
 }
 
-class Section{
+export class Section {
 
-    public contents:[Content]
+    public title: string;
+    public contents: [Content]
 }
 
-class Curriculum{
+export class Curriculum {
 
-
-    public sections:[Section]
+    public sections: [Section]
 
 }
 
@@ -38,6 +47,7 @@ class CourseLandingPage {
     }
     public courseImage: string;
     public promotionalVideo: string;
+
 }
 
 class Settings {
@@ -54,10 +64,11 @@ export class Craft {
     public title: string;
     public createdBy: string;
     public publish: boolean;
-    public enableCertificate:boolean;
+    public enableCertificate: boolean;
     public targetYourStudents: TargetYourStudents;
     public courseLandingPage: CourseLandingPage;
     public settings: Settings;
+    public curriculum: Curriculum;
 
     constructor(
 
