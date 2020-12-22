@@ -13,13 +13,17 @@ import { Content } from '../../../../models/craft'
 export class CurriculumComponent implements OnInit {
 
   sections: [Section];
+  detailsModal: {
+    content: Content,
+    section: Section
+  } = { content: new Content(), section: new Section };
 
   constructor(private craftService: CraftService,
     private craftForm: CraftFormService) { }
 
   ngOnInit(): void {
     this.craftForm.craft.subscribe(res => {
-      this.sections=res.curriculum.sections;
+      this.sections = res.curriculum.sections;
     })
 
   }
@@ -27,26 +31,34 @@ export class CurriculumComponent implements OnInit {
   addSection() {
 
     let section = new Section();
-    section.contents = [new Content()]
+    let content = new Content();
+    content.title = "Content 1";//First content object
+    section.contents = [content];
 
     if (this.sections !== undefined) {
-      section.title=`Section ${this.sections.length + 1}`
+      section.title = `Section ${this.sections.length + 1}`
       this.sections.push(section);
     }
     else {
-      section.title=`Section 1`
+      section.title = `Section 1`
       this.sections = [section];
     }
 
   }
 
   addContent(section: Section) {
-    section.contents.push(new Content());
+
+    let content = new Content();
+    let countContent = section.contents != undefined ? (section.contents.length + 1) : 1;
+    content.title = `Content ${countContent}`
+
+    section.contents.push(content);
   }
 
 
+
   preview() {
-    this.save();    
+    this.save();
   }
 
   deleteSection(sectionId: number) {
@@ -61,9 +73,13 @@ export class CurriculumComponent implements OnInit {
     })
   }
 
-  deleteContent(sectionId:number,contentId: number){
-
-    this.sections[sectionId].contents.splice(contentId,1)
+  deleteContent(sectionId: number, contentId: number) {
+    this.sections[sectionId].contents.splice(contentId, 1)
   }
 
+  loadModal(content: Content,section: Section) {
+    this.detailsModal.content = content;
+    this.detailsModal.section = section;
+    console.log(this.detailsModal)
+  }
 }

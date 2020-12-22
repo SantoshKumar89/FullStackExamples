@@ -29,10 +29,10 @@
       </td>
       <td>
         <div class="card card-body" id="j" name="j" >
-          <h5 class="card-text">Introduction</h5>
+          <h5 class="card-text">{{content.title}}</h5>
           <hr>
           <div>
-            <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal"
+            <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" (click)="loadModal(content,section)"
               data-target="#contentDetailsModal">
               <i class="fas fa-plus pr-1"></i>
               Details
@@ -45,7 +45,7 @@
     </tr>
   </table>
   <div class="text-center">
-    <button type="button" class="btn btn-primary btn-sm" (click)="addContent(section)"><i class="fas fa-plus pr-1"></i>
+    <button type="button" class="btn btn-outline-primary btn-sm" (click)="addContent(section)"><i class="fas fa-plus pr-1"></i>
       Content</button>
   </div>
 </div>
@@ -57,7 +57,7 @@
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="contentDetailsModalLabel">Introduction</h5>
+        <h5 class="modal-title" id="contentDetailsModalLabel">{{detailsModal.section.title}} > {{detailsModal.content.title}}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
