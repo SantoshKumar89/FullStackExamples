@@ -1,7 +1,9 @@
 <h4 class="font-weight-light inline">Curriculum</h4>
-<button type="button" class="btn btn-primary btn-sm mx-2" (click)="addSection()"> <i class="fas fa-plus"></i> Section</button>
+<button type="button" class="btn btn-primary btn-sm mx-2" (click)="addSection()"> <i class="fas fa-plus"></i>
+  Section</button>
 
-<button type="button" class="float-right btn btn-sm  btn-outline-success" (click)="preview()"> <i class="fas fa-play"></i> Preview</button>
+<button type="button" class="float-right btn btn-sm  btn-outline-success" (click)="preview()"> <i
+    class="fas fa-play"></i> Preview</button>
 
 <button type="button" class="float-right btn btn-sm  mx-2 btn-success" (click)="save()">Save</button>
 
@@ -11,11 +13,11 @@
 <div id="sections" class="pb-3" *ngFor="let section of sections; let i=index;">
   <table class="table table-borderless">
     <tr>
-      <th>        
+      <th>
       </th>
       <th>
         <div class="card w-100">
-          <h5 class="card-header"> {{section.title}}
+          <h5 class="card-header" (click)="isCollapsed = !isCollapsed"> {{section.title}}
             <button class="btn p-0 m-0 float-right" (click)=deleteSection(i)> <span style=" color: Tomato;">
                 <i class="fas fa-trash-alt  color: Tomato;"></i></span></button>
           </h5>
@@ -24,15 +26,16 @@
     </tr>
     <tr *ngFor="let content of section.contents; let j=index;">
       <td class="align-middle ">
-        <button class="btn p-0 m-0" (click)=deleteContent(i,j) [disabled]="section.contents.length === 1 "> <span style=" color: Tomato;">
-          <i class="fas fa-trash-alt  color: Tomato;"></i></span></button>
+        <button class="btn p-0 m-0" (click)=deleteContent(i,j) [disabled]="section.contents.length === 1 "> <span
+            style=" color: Tomato;">
+            <i class="fas fa-trash-alt  color: Tomato;"></i></span></button>
       </td>
       <td>
-        <div class="card card-body" id="j" name="j" >
+        <div class="card card-body" id="j" name="j">
           <h5 class="card-text">{{content.title}}</h5>
           <hr>
           <div>
-            <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" (click)="loadModal(content,section)"
+            <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" (click)="loadModal(i,j)"
               data-target="#contentDetailsModal">
               <i class="fas fa-plus pr-1"></i>
               Details
@@ -45,7 +48,8 @@
     </tr>
   </table>
   <div class="text-center">
-    <button type="button" class="btn btn-outline-primary btn-sm" (click)="addContent(section)"><i class="fas fa-plus pr-1"></i>
+    <button type="button" class="btn btn-outline-primary btn-sm" (click)="addContent(section)"><i
+        class="fas fa-plus pr-1"></i>
       Content</button>
   </div>
 </div>
@@ -53,19 +57,21 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="contentDetailsModal" tabindex="-1" aria-labelledby="contentDetailsModalLabel" aria-hidden="true">
+<div class="modal fade" id="contentDetailsModal" tabindex="-1" aria-labelledby="contentDetailsModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="contentDetailsModalLabel">{{detailsModal.section.title}} > {{detailsModal.content.title}}</h5>
+        <h5 class="modal-title" id="contentDetailsModalLabel">{{currentModalDetails.sectionTitle}} >
+          {{currentModalDetails.contentTitle}} </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form>
-          <div class="form-group">
-            <label class="mr-4">Content</label><br>
+        <form (submit)="saveModal()" [formGroup]="detailsForm">
+
+          <div class="form-group" formGroupName='content'>
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"
                 checked>
@@ -76,32 +82,32 @@
                 disabled>
               <label class="form-check-label" for="inlineRadio2">Upload</label>
             </div>
-
-            <input class="form-control mt-3" type="text" placeholder="Eg: https://youtu.be/4oTfQoj_Jrc">
-
+            <div class="form-group">
+              <div class="form-group" formGroupName='embed'>
+                <input class="form-control mt-3" type="text" formControlName='url'
+                  placeholder="Eg: https://youtu.be/4oTfQoj_Jrc">
+              </div>
+            </div>
           </div>
-        </form>
-        <hr>
-        <form>
+          <hr>
           <div class="form-group">
             <label>Description</label>
-            <textarea class="form-control" id="w3review" name="w3review" rows="4" cols="50"> </textarea>
+            <textarea class="form-control" formControlName='description' id="w3review" name="w3review" rows="4"
+              cols="50"> </textarea>
           </div>
-        </form>
-        <hr>
-        <form>
+          <hr>
           <div class="form-group">
             <label>Resources</label>
             <div class="custom-file">
-              <input type="file" class="custom-file-input" id="customFile">
+              <input type="file" class="custom-file-input" id="customFile" formControlName='resources'>
               <label class="custom-file-label" for="customFile">Choose file</label>
             </div>
           </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </div>
         </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>

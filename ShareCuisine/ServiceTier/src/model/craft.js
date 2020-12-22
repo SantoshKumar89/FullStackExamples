@@ -39,13 +39,12 @@ const craftSchema = mongoose.Schema({
                 title: { type: String },
                 contents: [{
                     title: { type: String },
-                    content: {
-                        embed: {
-                            url: { type: String }
-                        }, upload: {
-
-                        }
-                    },
+                    content:{
+                    embed: {
+                        url: { type: String }
+                    }, upload: {
+                        location:{type: String}
+                    }},                   
                     description: { type: String },
                     resources: { type: [String] }
 
