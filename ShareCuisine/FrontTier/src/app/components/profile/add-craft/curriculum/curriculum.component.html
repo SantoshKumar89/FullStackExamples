@@ -1,7 +1,10 @@
 <h4 class="font-weight-light inline">Curriculum</h4>
-<button type="button" class="float-right btn btn-success" (click)="showData()"> <i class="fas fa-play"></i> Preview</button>
+<button type="button" class="btn btn-primary btn-sm mx-2" (click)="addSection()"> <i class="fas fa-plus"></i> Section</button>
 
-<button type="button" class="float-right btn btn-primary mx-2" (click)="addSection()"> <i class="fas fa-plus"></i> Section</button>
+<button type="button" class="float-right btn btn-sm  btn-outline-success" (click)="preview()"> <i class="fas fa-play"></i> Preview</button>
+
+<button type="button" class="float-right btn btn-sm  mx-2 btn-success" (click)="save()">Save</button>
+
 <hr>
 
 <!--Section Start-->
@@ -29,7 +32,7 @@
           <h5 class="card-text">Introduction</h5>
           <hr>
           <div>
-            <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal"
+            <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal"
               data-target="#contentDetailsModal">
               <i class="fas fa-plus pr-1"></i>
               Details
@@ -42,7 +45,7 @@
     </tr>
   </table>
   <div class="text-center">
-    <button type="button" class="btn btn-outline-primary btn-sm" (click)="addContent(section)"><i class="fas fa-plus pr-1"></i>
+    <button type="button" class="btn btn-primary btn-sm" (click)="addContent(section)"><i class="fas fa-plus pr-1"></i>
       Content</button>
   </div>
 </div>

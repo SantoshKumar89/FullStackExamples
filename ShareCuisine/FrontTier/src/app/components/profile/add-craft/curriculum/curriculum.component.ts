@@ -18,7 +18,9 @@ export class CurriculumComponent implements OnInit {
     private craftForm: CraftFormService) { }
 
   ngOnInit(): void {
-
+    this.craftForm.craft.subscribe(res => {
+      this.sections=res.curriculum.sections;
+    })
 
   }
 
@@ -44,7 +46,7 @@ export class CurriculumComponent implements OnInit {
 
 
   preview() {
-
+    this.save();    
   }
 
   deleteSection(sectionId: number) {
@@ -52,8 +54,11 @@ export class CurriculumComponent implements OnInit {
   }
 
 
-  showData() {
-    console.log(this.sections);
+  save() {
+    this.craftForm.currentCraftValue.curriculum.sections = this.sections;
+    this.craftService.updateCraftById(this.craftForm.currentCraftValue).subscribe(res => {
+      console.log("updated successfully")
+    })
   }
 
   deleteContent(sectionId:number,contentId: number){
