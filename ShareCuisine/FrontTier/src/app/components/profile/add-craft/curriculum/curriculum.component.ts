@@ -14,13 +14,10 @@ export class CurriculumComponent implements OnInit {
 
   sections: [Section];
 
-  sectionId: number;
-
   constructor(private craftService: CraftService,
     private craftForm: CraftFormService) { }
 
   ngOnInit(): void {
-
 
 
   }
@@ -31,9 +28,11 @@ export class CurriculumComponent implements OnInit {
     section.contents = [new Content()]
 
     if (this.sections !== undefined) {
+      section.title=`Section ${this.sections.length + 1}`
       this.sections.push(section);
     }
     else {
+      section.title=`Section 1`
       this.sections = [section];
     }
 

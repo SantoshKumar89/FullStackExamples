@@ -8,11 +8,11 @@
 <div id="sections" class="pb-3" *ngFor="let section of sections; let i=index;">
   <table class="table table-borderless">
     <tr>
-      <th>
+      <th>        
       </th>
       <th>
         <div class="card w-100">
-          <h5 class="card-header">Section 1
+          <h5 class="card-header"> {{section.title}}
             <button class="btn p-0 m-0 float-right" (click)=deleteSection(i)> <span style=" color: Tomato;">
                 <i class="fas fa-trash-alt  color: Tomato;"></i></span></button>
           </h5>
@@ -21,7 +21,7 @@
     </tr>
     <tr *ngFor="let content of section.contents; let j=index;">
       <td class="align-middle ">
-        <button class="btn p-0 m-0" (click)=deleteContent(i,j)> <span style=" color: Tomato;">
+        <button class="btn p-0 m-0" (click)=deleteContent(i,j) [disabled]="section.contents.length === 1 "> <span style=" color: Tomato;">
           <i class="fas fa-trash-alt  color: Tomato;"></i></span></button>
       </td>
       <td>
@@ -30,7 +30,7 @@
           <hr>
           <div>
             <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal"
-              data-target="#exampleModal">
+              data-target="#contentDetailsModal">
               <i class="fas fa-plus pr-1"></i>
               Details
             </button>
@@ -50,11 +50,11 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="contentDetailsModal" tabindex="-1" aria-labelledby="contentDetailsModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Introduction</h5>
+        <h5 class="modal-title" id="contentDetailsModalLabel">Introduction</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
