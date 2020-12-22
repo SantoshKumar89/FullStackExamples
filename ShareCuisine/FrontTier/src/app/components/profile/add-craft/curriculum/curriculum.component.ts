@@ -4,6 +4,7 @@ import { CraftFormService } from '../craft-form.service';
 import { Section } from '../../../../models/craft'
 import { Content } from '../../../../models/craft'
 import { FormGroup, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-curriculum',
   templateUrl: './curriculum.component.html',
@@ -11,10 +12,8 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class CurriculumComponent implements OnInit {
 
+  craftPreviewRoute:string;
   detailsForm: FormGroup;
-  public isCollapsed = false;
-
-
   sections: [Section];
   currentModalDetails: {
     contentIndex: number,
@@ -26,11 +25,13 @@ export class CurriculumComponent implements OnInit {
 
 
   constructor(private craftService: CraftService,
-    private craftForm: CraftFormService) { }
+    private craftForm: CraftFormService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.craftForm.craft.subscribe(res => {
       this.sections = res.curriculum.sections;
+      this.craftPreviewRoute=`craft/${res._id}`;
     })
 
     this.detailsForm = new FormGroup({
@@ -82,7 +83,8 @@ export class CurriculumComponent implements OnInit {
 
 
   preview() {
-    this.save();
+    this.router.navigate(['/craft/1']);
+
   }
 
   deleteSection(sectionId: number) {
@@ -91,8 +93,6 @@ export class CurriculumComponent implements OnInit {
 
 
   save() {
-
-
     this.craftForm.currentCraftValue.curriculum.sections = this.sections;
     this.craftService.updateCraftById(this.craftForm.currentCraftValue).subscribe(res => {
       console.log("updated successfully")

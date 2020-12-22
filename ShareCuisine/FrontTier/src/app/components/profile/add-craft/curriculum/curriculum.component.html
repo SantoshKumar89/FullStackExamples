@@ -1,11 +1,11 @@
 <h4 class="font-weight-light inline">Curriculum</h4>
 <button type="button" class="btn btn-primary btn-sm mx-2" (click)="addSection()"> <i class="fas fa-plus"></i>
   Section</button>
+<a  href="{{craftPreviewRoute}}" target="_blank">
+<button type="button" class="float-right btn btn-sm  btn-outline-success"> <i
+    class="fas fa-play"></i> Preview</button></a>
 
-<button type="button" class="float-right btn btn-sm  btn-outline-success" (click)="preview()"> <i
-    class="fas fa-play"></i> Preview</button>
-
-<button type="button" class="float-right btn btn-sm  mx-2 btn-success" (click)="save()">Save</button>
+<button type="button" class="float-right btn btn-sm  mx-2 btn-success" (click)="save()"><i class="far fa-save pr-1"></i>Save</button>
 
 <hr>
 
@@ -14,46 +14,50 @@
   <table class="table table-borderless">
     <tr>
       <th>
-      </th>
-      <th>
         <div class="card w-100">
-          <h5 class="card-header" (click)="isCollapsed = !isCollapsed"> {{section.title}}
-            <button class="btn p-0 m-0 float-right" (click)=deleteSection(i)> <span style=" color: Tomato;">
-                <i class="fas fa-trash-alt  color: Tomato;"></i></span></button>
-          </h5>
+          <a class="text-decoration-none" data-toggle="collapse" href="#section{{i}}" aria-expanded="false"
+            aria-controls="multiCollapseExample1">
+            <h5 class="card-header" > {{section.title}}
+
+              <button class="btn" ></button>
+              <button class="btn p-0 m-0 float-right" (click)=deleteSection(i)> <span style=" color: Tomato;">
+                  <i class="fas fa-trash-alt  color: Tomato;"></i></span></button>
+            </h5>
+          </a>
         </div>
       </th>
     </tr>
-    <tr *ngFor="let content of section.contents; let j=index;">
-      <td class="align-middle ">
-        <button class="btn p-0 m-0" (click)=deleteContent(i,j) [disabled]="section.contents.length === 1 "> <span
-            style=" color: Tomato;">
-            <i class="fas fa-trash-alt  color: Tomato;"></i></span></button>
-      </td>
+    <tr *ngFor="let content of section.contents; let j=index;" id="section{{i}}" class="collapse show">
       <td>
-        <div class="card card-body" id="j" name="j">
-          <h5 class="card-text">{{content.title}}</h5>
-          <hr>
-          <div>
-            <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" (click)="loadModal(i,j)"
-              data-target="#contentDetailsModal">
-              <i class="fas fa-plus pr-1"></i>
-              Details
-            </button>
-            <button type="button" class="btn btn-outline-success btn-sm mx-2 float-right"> <i class="fas fa-play"></i>
-              Preview</button>
+        <div id="section{{i}}" class="collapse show">
+          <div class="card card-body" id="j" name="j">
+            <h5 class="card-text">{{content.title}}</h5>
+            <hr>
+            <div>
+              <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" (click)="loadModal(i,j)"
+                data-target="#contentDetailsModal">
+                <i class="far fa-file-alt pr-1"></i>
+                Details
+              </button>
+              <button class="btn p-0 m-0 float-right" (click)=deleteContent(i,j)
+                [disabled]="section.contents.length === 1 "> <span style=" color: Tomato;">
+                  <i class="fas fa-trash-alt  color: Tomato;"></i></span></button>
+            </div>
           </div>
         </div>
       </td>
     </tr>
   </table>
-  <div class="text-center">
-    <button type="button" class="btn btn-outline-primary btn-sm" (click)="addContent(section)"><i
-        class="fas fa-plus pr-1"></i>
-      Content</button>
+  <div id="section{{i}}" class="collapse show">
+    <div class="text-center">
+      <button type="button" class="btn btn-outline-primary btn-sm" (click)="addContent(section)"><i
+          class="fas fa-plus pr-1"></i>
+        Content</button>
+    </div>
   </div>
 </div>
 <!--Section End-->
+
 
 
 <!-- Modal -->
