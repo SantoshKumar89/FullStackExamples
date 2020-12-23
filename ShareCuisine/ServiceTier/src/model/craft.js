@@ -53,16 +53,13 @@ const craftSchema = mongoose.Schema({
     },
     courseLandingPage: {
         courseTitle: {
-            type: String,
-            default: ""
+            type: String
         },
         courseSubtitle: {
-            type: String,
-            default: ""
+            type: String
         },
         courseDescription: {
-            type: String,
-            default: ""
+            type: String
         },
         basicInfo: {
             language: {
@@ -72,12 +69,10 @@ const craftSchema = mongoose.Schema({
                 type: Schema.Types.ObjectId, ref: 'level'
             }
         }, courseImage: {
-            type: String,
-            default: ""
+            type: String
         },
         promotionalVideo: {
-            type: String,
-            default: ""
+            type: String
         }
     },
     settings: {

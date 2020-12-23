@@ -14,6 +14,7 @@ export class AddCraftComponent implements OnInit {
 
   public craftCreated; boolean=false;
   public craftId: string;
+  public canBePublished: boolean=false;
 
 
   constructor(private nav: NavbarServiceService,
@@ -34,6 +35,12 @@ export class AddCraftComponent implements OnInit {
       this.craftCreated=true;
     })
 
+    this.craftForm.craft.subscribe(res => {
+      console.log("changed")
+      if(res.courseLandingPage != undefined && res.courseLandingPage.courseTitle != undefined){this.canBePublished=true};
+
+    })
+    
 
   }
 

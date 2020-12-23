@@ -35,7 +35,7 @@ export class CourseLandingPageComponent implements OnInit {
       this.craftForm.craft.subscribe(res => {
         const languageSelection = this.landingPageForm.get('basicInfo').get('language');
 
-        if (res.courseLandingPage.basicInfo != undefined)
+        if (res.courseLandingPage != undefined)
           languageSelection.setValue(res.courseLandingPage.basicInfo.language._id)
         else {
           languageSelection.setValue(this.defaultLanguage._id)
@@ -54,7 +54,7 @@ export class CourseLandingPageComponent implements OnInit {
 
         const levelSelection = this.landingPageForm.get('basicInfo').get('level');
 
-        if (res.courseLandingPage.basicInfo != undefined)
+        if (res.courseLandingPage != undefined)
           levelSelection.setValue(res.courseLandingPage.basicInfo.level._id)
         else {
           levelSelection.setValue(this.defaultLevel._id)
@@ -68,18 +68,16 @@ export class CourseLandingPageComponent implements OnInit {
 
 
       this.landingPageForm = new FormGroup({
-        'courseTitle': new FormControl(res.courseLandingPage.courseTitle),
-        'courseSubtitle': new FormControl(res.courseLandingPage.courseSubtitle),
-        'courseDescription': new FormControl(res.courseLandingPage.courseDescription),
+        'courseTitle': new FormControl((res.courseLandingPage !=undefined)? res.courseLandingPage.courseTitle:""),
+        'courseSubtitle': new FormControl((res.courseLandingPage !=undefined)?res.courseLandingPage.courseSubtitle:""),
+        'courseDescription': new FormControl((res.courseLandingPage !=undefined)?res.courseLandingPage.courseDescription:""),
         'basicInfo': new FormGroup({
           'language': new FormControl(""),
           'level': new FormControl("")
         }),
-        'courseImage': new FormControl(res.courseLandingPage.courseImage),
-        'promotionalVideo': new FormControl(res.courseLandingPage.promotionalVideo)
+        'courseImage': new FormControl((res.courseLandingPage !=undefined)?res.courseLandingPage.courseImage:""),
+        'promotionalVideo': new FormControl((res.courseLandingPage !=undefined)?res.courseLandingPage.promotionalVideo:"")
       })
-
-
 
 
     }
