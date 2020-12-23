@@ -7,6 +7,10 @@ levelSchema= new mongoose.Schema({
     },
     value:{
         type: String
+    },
+    isDefault:{
+        type: Boolean,
+        default :false
     }
 
 

@@ -22,14 +22,14 @@
             <label>Basic Info</label>
             <div class="form-inline">
                 <select class="form-control" formControlName="language">
-                    <option value="" disabled> Choose a language</option>
-                    <option *ngFor="let language of languages" [ngValue]="language._id">
+                    <!--<option value="" disabled> Choose a language</option>-->
+                    <option *ngFor="let language of languages" [ngValue]="language._id"  [disabled]="language.isDefault === true">
                         {{ language.name }}
                     </option>
                 </select>
                 <select id="level" name="level" class="form-control" formControlName="level">
-                    <option value="" disabled> Select a level</option>
-                    <option *ngFor="let level of levels" [ngValue]="level._id">
+                    <!--<option value="" disabled> Select a level</option>-->
+                    <option *ngFor="let level of levels" [ngValue]="level._id"  [disabled]="level.isDefault === true">
                         {{level.value}}
                     </option>
                 </select>

@@ -7,6 +7,9 @@ const languageSchema =  mongoose.Schema({
     },
     name:{
         type: String
+    }, isDefault:{
+        type: Boolean,
+        default :false
     }
 
 });
