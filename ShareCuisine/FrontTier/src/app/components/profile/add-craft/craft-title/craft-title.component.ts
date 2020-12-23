@@ -1,7 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CraftService } from '../../../../services/craft.service';
-import { CraftFormService } from '../craft-form.service'
+import { CraftFormService } from '../craft-form.service';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-craft-title',
@@ -15,7 +17,8 @@ export class CraftTitleComponent implements OnInit, OnDestroy {
 
 
   constructor(private craftService: CraftService,
-    private craftForm: CraftFormService) { }
+    private craftForm: CraftFormService,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
 
@@ -29,7 +32,7 @@ export class CraftTitleComponent implements OnInit, OnDestroy {
   save() {
     this.craftForm.currentCraftValue.title = this.titleForm.value.title;
     this.craftService.updateCraftById(this.craftForm.currentCraftValue).subscribe(res => {
-      console.log("updated successfully")
+      this.toastr.success('Hello world!', 'Toastr fun!');
     })
   }
 
