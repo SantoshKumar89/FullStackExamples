@@ -1,9 +1,9 @@
 <div class="container-fluid px-4">
 
-<div class="row pt-2">
-<div class="col-12 pb-2 mt-0">
+<div class="row pt-2" *ngIf="craft !== undefined">
+<div class="col-12 pb-2 mt-0" *ngIf="user !== undefined">
         <a href="/profile/{{user._id}}"><img class="avatarPicture" src="../../../assets/Images/SiginUp.jpg"></a>
-        <h4 class="font-weight-lighter inline px-3">Santosh Kumar</h4>   
+        <h4 class="font-weight-lighter inline px-3">{{user.name}}</h4>   
 
         <hr>
 </div>
@@ -72,8 +72,7 @@
     </div>
 <div class="col-12">
     <hr>
-    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aliquid amet quisquam, quaerat architecto reprehenderit, excepturi ipsum nemo eveniet quos adipisci illo praesentium nobis optio rerum cumque magnam numquam voluptate quibusdam.
-   
+{{craft.courseLandingPage.courseDescription}}   
 </div>
 </div>
 

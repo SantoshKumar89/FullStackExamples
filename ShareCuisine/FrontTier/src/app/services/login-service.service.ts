@@ -38,6 +38,10 @@ export class LoginServiceService {
 
 
   /** POST: add a new user to the database */
+  getUserById(id: String): Observable<User> {
+    return this.http.get<User>(`${environment.apiUrl}/api/v1/user/${id}`)
+  }
+  /** POST: add a new user to the database */
   authenticate(user: User): Observable<TokenResponse> {
     return this.http.post<TokenResponse>(`${environment.apiUrl}/api/v1/login`, {
       user

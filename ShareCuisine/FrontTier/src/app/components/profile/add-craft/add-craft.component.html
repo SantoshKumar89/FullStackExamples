@@ -16,19 +16,28 @@
                     aria-controls="v-pills-students" aria-selected="false">Students</a>
                 <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab"
                     aria-controls="v-pills-settings" aria-selected="false">Settings</a>
+                    
+            </div>
+            <hr>
+            <div class="mt-4 text-center">      
+                <a  href="craft/{{craftId}}" target="_blank" class="text-decoration-none">
+                    <button type="button" class=" btn  btn-warning btn-block"> <i
+                        class="fas fa-play mr-1"></i> Preview</button></a>
+                      <button class="btn btn-success mt-3 btn-block " > <i class="fas fa-paper-plane mr-2"></i>
+                        Publish </button>                      
             </div>
 
         </div>
         <div class="col-9">
             <div class="tab-content tab-custom p-4" id="v-pills-tabContent">
-                <div class="tab-pane fade  " id="v-pills-title" role="tabpanel"
+                <div class="tab-pane fade show active " id="v-pills-title" role="tabpanel"
                     aria-labelledby="v-pills-title-tab">
                     <app-craft-title></app-craft-title>
                 </div>
                 <div class="tab-pane fade " id="v-pills-tys" role="tabpanel" aria-labelledby="v-pills-tys-tab">
                     <app-target-your-students></app-target-your-students>
                 </div>
-                <div class="tab-pane fade show active" id="v-pills-curriculum" role="tabpanel" aria-labelledby="v-pills-curriculum-tab">
+                <div class="tab-pane fade " id="v-pills-curriculum" role="tabpanel" aria-labelledby="v-pills-curriculum-tab">
                     <app-curriculum></app-curriculum>
                 </div>
                 <div class="tab-pane fade " id="v-pills-clp" role="tabpanel" aria-labelledby="v-pills-clp-tab">

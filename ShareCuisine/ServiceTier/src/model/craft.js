@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 // Setup schema
 const craftSchema = mongoose.Schema({
     createdBy: {
-        type: Schema.Types.ObjectId, ref: 'User'
+        type: Schema.Types.ObjectId, ref: 'user'
     },
     createdDate: {
         type: Date,
@@ -66,12 +66,10 @@ const craftSchema = mongoose.Schema({
         },
         basicInfo: {
             language: {
-                type: Schema.Types.ObjectId, ref: 'language',
-                default: null
+                type: Schema.Types.ObjectId, ref: 'language'
             },
             level: {
-                type: Schema.Types.ObjectId, ref: 'level',
-                default: null
+                type: Schema.Types.ObjectId, ref: 'level'
             }
         }, courseImage: {
             type: String,

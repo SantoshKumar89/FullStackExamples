@@ -29,11 +29,7 @@ userRoute.get("/:id", async function (req, res) {
         User.findById(req.params.id, function (err, result) {
             if (err)
                 res.send(err);
-            res.json({
-                status: "success",
-                message: 'User details loading..',
-                data: result
-            });
+            res.json(result);
         });
     } else {
        

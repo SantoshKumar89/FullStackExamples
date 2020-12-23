@@ -13,6 +13,7 @@ import { CraftFormService } from './craft-form.service'
 export class AddCraftComponent implements OnInit {
 
   public craftCreated; boolean=false;
+  public craftId: string;
 
 
   constructor(private nav: NavbarServiceService,
@@ -25,6 +26,7 @@ export class AddCraftComponent implements OnInit {
     this.nav.show();
     this.route.queryParams.subscribe(params => {
       this.craftForm.currentCraftValue._id = this.route.snapshot.paramMap.get('craftId');
+      this.craftId=this.craftForm.currentCraftValue._id;
     });
 
     this.craftService.getCraftById(this.craftForm.currentCraftValue._id).subscribe(res => {

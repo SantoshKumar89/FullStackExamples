@@ -13,6 +13,7 @@ craftRouter.post("/", async function (req, res) {
 
 //Update Craft object
 craftRouter.put("/", async function (req, res) {
+    console.log(req.body);
     craft.findOneAndUpdate({_id:req.body.craft._id, createdBy : req.body.craft.createdBy},req.body.craft, function (err, data) {
         if (err) {console.log(err)};
         res.send(data);

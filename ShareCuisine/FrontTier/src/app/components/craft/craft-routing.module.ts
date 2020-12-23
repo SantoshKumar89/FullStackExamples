@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { CraftComponent } from './craft.component';
 
-const routes: Routes = [{ path: ':id', component: CraftComponent }];
+const routes: Routes = [{ path: ':craftId', component: CraftComponent }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
