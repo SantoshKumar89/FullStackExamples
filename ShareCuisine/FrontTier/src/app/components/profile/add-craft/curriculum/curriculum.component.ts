@@ -5,6 +5,9 @@ import { Section } from '../../../../models/craft'
 import { Content } from '../../../../models/craft'
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+
+
 @Component({
   selector: 'app-curriculum',
   templateUrl: './curriculum.component.html',
@@ -26,7 +29,8 @@ export class CurriculumComponent implements OnInit {
 
   constructor(private craftService: CraftService,
     private craftForm: CraftFormService,
-    private router: Router) { }
+    private router: Router,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.craftForm.craft.subscribe(res => {
@@ -89,18 +93,20 @@ export class CurriculumComponent implements OnInit {
 
   deleteSection(sectionId: number) {
     this.sections.splice(sectionId, 1);
+
   }
 
 
   save() {
     this.craftForm.currentCraftValue.curriculum.sections = this.sections;
     this.craftService.updateCraftById(this.craftForm.currentCraftValue).subscribe(res => {
-      console.log("updated successfully")
+      this.toastr.success('Updated', 'Curriculum');
     })
   }
 
   deleteContent(sectionId: number, contentId: number) {
     this.sections[sectionId].contents.splice(contentId, 1)
+
   }
 
   loadModal(section: number, content: number) {

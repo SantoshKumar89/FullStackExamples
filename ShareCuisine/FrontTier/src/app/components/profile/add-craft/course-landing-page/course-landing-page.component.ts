@@ -4,7 +4,10 @@ import { Language } from 'src/app/models/language';
 import { Level } from 'src/app/models/level';
 import { MasterService } from 'src/app/services/master.service';
 import { CraftService } from '../../../../services/craft.service';
-import { CraftFormService } from '../craft-form.service'
+import { CraftFormService } from '../craft-form.service';
+import { ToastrService } from 'ngx-toastr';
+
+
 
 @Component({
   selector: 'app-course-landing-page',
@@ -20,7 +23,7 @@ export class CourseLandingPageComponent implements OnInit {
   defaultLevel: Level;
 
 
-  constructor(private craftForm: CraftFormService, private masterService: MasterService, private craftService: CraftService) { }
+  constructor(private toastr: ToastrService,private craftForm: CraftFormService, private masterService: MasterService, private craftService: CraftService) { }
 
   ngOnInit(): void {
 
@@ -64,10 +67,6 @@ export class CourseLandingPageComponent implements OnInit {
     this.craftForm.craft.subscribe(res => {
 
 
-      const levelSelection = (res.courseLandingPage.basicInfo != undefined) ? new FormControl(res.courseLandingPage.basicInfo.level._id) : new FormControl("");
-
-
-
       this.landingPageForm = new FormGroup({
         'courseTitle': new FormControl(res.courseLandingPage.courseTitle),
         'courseSubtitle': new FormControl(res.courseLandingPage.courseSubtitle),
@@ -97,7 +96,7 @@ export class CourseLandingPageComponent implements OnInit {
     this.craftForm.currentCraftValue.courseLandingPage = this.landingPageForm.value;
 
     this.craftService.updateCraftById(this.craftForm.currentCraftValue).subscribe(res => {
-      console.log("updated");
+      this.toastr.success('Updated','Course Landing Page')
     });
 
 

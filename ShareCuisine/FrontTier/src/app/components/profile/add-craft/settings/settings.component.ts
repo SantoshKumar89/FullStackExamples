@@ -4,6 +4,7 @@ import { Enrollment } from 'src/app/models/enrollment';
 import { MasterService } from 'src/app/services/master.service';
 import { CraftService } from '../../../../services/craft.service';
 import { CraftFormService } from '../craft-form.service'
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class SettingsComponent implements OnInit {
   privateWithPswConst = 'privateWithPsw';
 
 
-  constructor(private craftForm: CraftFormService, private masterService: MasterService, private craftService: CraftService) { }
+  constructor(private toastr: ToastrService,private craftForm: CraftFormService, private masterService: MasterService, private craftService: CraftService) { }
 
 
   ngOnInit(): void {
@@ -61,7 +62,7 @@ export class SettingsComponent implements OnInit {
   saveEnrollmentForm() {
     this.craftForm.currentCraftValue.settings = { enrollment: this.enrollmentForm.value };
     this.craftService.updateCraftById(this.craftForm.currentCraftValue).subscribe(res => {
-      console.log("updated");
+      this.toastr.success('Updated','Settings')
     });
   }
 
@@ -70,7 +71,7 @@ export class SettingsComponent implements OnInit {
     console.log(this.certificatesForm.value);
     this.craftForm.currentCraftValue.enableCertificate = this.certificatesForm.value.enableCertificate;
     this.craftService.updateCraftById(this.craftForm.currentCraftValue).subscribe(res => {
-      console.log("updated");
+      this.toastr.success('Updated','Settings')
     });
 
   }

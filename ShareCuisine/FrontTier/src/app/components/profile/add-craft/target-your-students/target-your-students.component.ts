@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormArray, Validators, AbstractControl } from '@angular/forms';
 import { CraftFormService } from '../craft-form.service'
 import { CraftService } from '../../../../services/craft.service';
-import { element } from 'protractor';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-target-your-students',
@@ -15,7 +15,7 @@ export class TargetYourStudentsComponent implements OnInit {
   targetYourStudents: FormGroup;
 
 
-  constructor(private craftForm: CraftFormService,private craftService:CraftService) { }
+  constructor(private craftForm: CraftFormService,private craftService:CraftService,private toastr: ToastrService) { }
 
   ngOnInit(): void {
 
@@ -63,9 +63,9 @@ export class TargetYourStudentsComponent implements OnInit {
   }
 
   save() {
-    console.log(this.targetYourStudents.value);
     this.craftForm.currentCraftValue.targetYourStudents = this.targetYourStudents.value;
     this.craftService.updateCraftById(this.craftForm.currentCraftValue).subscribe(res => {
+      this.toastr.success('Updated', 'Answers');
     })
 
   }

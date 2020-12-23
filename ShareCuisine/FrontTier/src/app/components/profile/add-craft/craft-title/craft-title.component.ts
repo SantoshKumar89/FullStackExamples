@@ -32,7 +32,7 @@ export class CraftTitleComponent implements OnInit, OnDestroy {
   save() {
     this.craftForm.currentCraftValue.title = this.titleForm.value.title;
     this.craftService.updateCraftById(this.craftForm.currentCraftValue).subscribe(res => {
-      this.toastr.success('Hello world!', 'Toastr fun!');
+      this.toastr.success('Updated', 'Title');
     })
   }
 
