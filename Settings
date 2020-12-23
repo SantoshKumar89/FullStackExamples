@@ -1,0 +1,6 @@
+PORT=3000
+
+MONGO_DB_HOST=cluster0.zhq9g.mongodb.net
+MONGO_DB_USER=admin
+MONGO_DB_PASS=2020adminJP
+MONGO_DB_NAME=Dev
