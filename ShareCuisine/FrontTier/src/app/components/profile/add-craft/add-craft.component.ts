@@ -1,10 +1,12 @@
 import { Component, OnInit, OnChanges, OnDestroy } from '@angular/core';
 import { NavbarServiceService } from './../../../services/navbar-service.service';
-import { Craft } from 'src/app/models/craft';
 import { CraftService } from '../../../services/craft.service';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import {  ActivatedRoute, Router } from '@angular/router';
 import { CraftFormService } from './craft-form.service'
 import { Subscription } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+
+
 
 @Component({
   selector: 'app-add-craft',
@@ -17,6 +19,7 @@ export class AddCraftComponent implements OnInit,OnDestroy {
   public craftCreated; boolean=false;
   public craftId: string;
   public canBePublished: boolean=false;
+  public userId: string;
   queryPathSubscription: Subscription = new Subscription();
   craftServiceSubscription: Subscription = new Subscription();;
   craftFormSubscription: Subscription = new Subscription();;
@@ -27,7 +30,10 @@ export class AddCraftComponent implements OnInit,OnDestroy {
   constructor(private nav: NavbarServiceService,
     private craftService: CraftService,
     private route: ActivatedRoute,
-    private craftForm:CraftFormService ) { }
+    private craftForm:CraftFormService,
+    private router:Router,
+    private toastr: ToastrService
+    ) { }
 
   ngOnInit(): void {
 
@@ -35,6 +41,7 @@ export class AddCraftComponent implements OnInit,OnDestroy {
     this.queryPathSubscription=this.route.queryParams.subscribe(params => {
       this.craftForm.currentCraftValue._id = this.route.snapshot.paramMap.get('craftId');
       this.craftId=this.craftForm.currentCraftValue._id;
+      this.userId= this.route.snapshot.paramMap.get('userId');
     });
 
     this.craftServiceSubscription=this.craftService.getCraftById(this.craftForm.currentCraftValue._id).subscribe(res => {
@@ -69,7 +76,6 @@ export class AddCraftComponent implements OnInit,OnDestroy {
 
     })
     
-
   }
 
   ngOnDestroy(): void {
@@ -80,5 +86,17 @@ export class AddCraftComponent implements OnInit,OnDestroy {
   
 
  
+  publish(){
+
+    this.craftForm.currentCraftValue.publish = true;
+    this.craftServiceSubscription=this.craftService.updateCraftById(this.craftForm.currentCraftValue).subscribe(res => {
+      this.toastr.success('Published Successfully!!', 'Craft');
+      const routeUrl=`/profile/${this.userId}`
+      this.router.navigate([routeUrl]);
+    })
+   
+
+
+  }
 
 }

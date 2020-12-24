@@ -34,8 +34,12 @@
               <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" (click)="loadModal(i,j)"
                 data-target="#contentDetailsModal">
                 <i class="far fa-file-alt pr-1"></i>
-                Details
+                Details                              
+                <span style="color:#ffc107"  *ngIf="!(content != undefined && content.content !=undefined && content.content.embed != undefined && content.content.embed.url !== undefined)">
+                    <i class="fas fa-exclamation-circle pr-1"></i></span>
+
               </button>
+         
               <button class="btn p-0 m-0 float-right" (click)=deleteContent(i,j)
                 [disabled]="section.contents.length === 1 "> <span style=" color: Tomato;">
                   <i class="fas fa-trash-alt  color: Tomato;"></i></span></button>
@@ -76,7 +80,7 @@
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"
                 checked>
-              <label class="form-check-label" for="inlineRadio1">Embed</label>
+              <label class="form-check-label" for="inlineRadio1">Embed Youtube Video Code</label>
             </div>
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"
@@ -85,10 +89,12 @@
             </div>
             <div class="form-group">
               <div class="form-group" formGroupName='embed'>
-                <input class="form-control mt-3" type="text" formControlName='url'
-                  placeholder="Eg: https://youtu.be/4oTfQoj_Jrc">
+                <input class="form-control mt-3" type="text" formControlName='url' 
+                  placeholder="Eg: 4oTfQoj_Jrc">
               </div>
             </div>
+            <a href="https://www.youtube.com/watch?v=kiyi-C7NQrQ" target="_blank"> Steps to get <b>youtube video code to embed</b></a>
+           
           </div>
           <hr>
           <div class="form-group">

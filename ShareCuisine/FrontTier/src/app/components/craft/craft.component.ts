@@ -47,16 +47,20 @@ export class CraftComponent implements OnInit {
 
   showContent(sectionId:number,contentId:number,content:Content){
 
+    try{
     this.currentSelectedContent=content;
     if(this.currentSelectedContent != undefined && 
       this.currentSelectedContent.content != undefined &&
       this.currentSelectedContent.content.embed != undefined &&
       this.currentSelectedContent.content.embed.url !=undefined
       ){
-      this.selectedEmbeddedUrl=this.sanitizer.bypassSecurityTrustResourceUrl(this.currentSelectedContent.content.embed.url)
+      this.selectedEmbeddedUrl=this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/"+this.currentSelectedContent.content.embed.url)
       }
     
-
+    }
+    catch(e){
+      console.log("error");
+    }
 
   }
 

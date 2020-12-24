@@ -23,7 +23,7 @@
                 <a  href="craft/{{craftId}}" target="_blank" class="text-decoration-none">
                     <button type="button" class=" btn  btn-warning btn-block"> <i
                         class="fas fa-play mr-1"></i> Preview</button></a>
-                      <button class="btn btn-success mt-3 btn-block " [disabled]=!canBePublished> <i class="fas fa-paper-plane mr-2"></i>
+                      <button class="btn btn-success mt-3 btn-block " (click)="publish()" [disabled]=!canBePublished> <i class="fas fa-paper-plane mr-2"></i>
                         Publish </button>   
                        <div class="alert alert-info mt-2" role="alert" *ngIf="canBePublished !== true">
                         Please Update <strong>Curriculum Section</strong>

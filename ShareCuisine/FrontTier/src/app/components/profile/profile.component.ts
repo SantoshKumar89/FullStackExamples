@@ -6,6 +6,8 @@ import {CraftService} from '../../services/craft.service';
 
 import { User } from 'src/app/models/user';
 import { Craft } from 'src/app/models/craft';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-profile',
@@ -18,7 +20,8 @@ export class ProfileComponent implements OnInit {
   constructor(private loginService: LoginServiceService,
     private nav:NavbarServiceService,
     private router:Router,
-    private craft:CraftService
+    private craft:CraftService,
+    private toastr: ToastrService
     ) { }
 
   ngOnInit(): void {
@@ -35,7 +38,15 @@ export class ProfileComponent implements OnInit {
     this.craft.addCraft(craft).subscribe(res => {
       const routeUrl=`/profile/${this.user._id}/craft/${res._id}`
       this.router.navigate([routeUrl]);
+      this.toastr.info('Please Update Details','Default Template Loaded',{
+        disableTimeOut: true,
+        tapToDismiss:true,
+        closeButton:true
+      });
     })
+
+    
+
     
   }
 
