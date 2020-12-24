@@ -3,8 +3,9 @@ import { NavbarServiceService } from './../../services/navbar-service.service';
 import { LoginServiceService } from './../../services/login-service.service';
 import { User } from 'src/app/models/user';
 import { ActivatedRoute } from '@angular/router';
-import { Craft } from 'src/app/models/craft';
+import { Craft, Content } from 'src/app/models/craft';
 import { CraftService } from '../../services/craft.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({
@@ -15,8 +16,11 @@ import { CraftService } from '../../services/craft.service';
 export class CraftComponent implements OnInit {
   craft: Craft;
   user: User;
+  public currentSelectedContent: Content=new Content();
+  selectedEmbeddedUrl: any;
 
-  constructor(private craftService: CraftService, private route: ActivatedRoute, private nav: NavbarServiceService, private loginService: LoginServiceService) { }
+
+  constructor(private sanitizer: DomSanitizer,private craftService: CraftService, private route: ActivatedRoute, private nav: NavbarServiceService, private loginService: LoginServiceService) { }
 
   ngOnInit(): void {
 
@@ -32,14 +36,27 @@ export class CraftComponent implements OnInit {
     this.craftService.getCraftById(craftId).subscribe(res => {
       this.craft = res;
 
-      console.log(this.craft);
       this.loginService.getUserById(res.createdBy).subscribe(res => {
         this.user = res;
-        console.log(this.user);
 
       })
 
     })
+
+  }
+
+  showContent(sectionId:number,contentId:number,content:Content){
+
+    this.currentSelectedContent=content;
+    if(this.currentSelectedContent != undefined && 
+      this.currentSelectedContent.content != undefined &&
+      this.currentSelectedContent.content.embed != undefined &&
+      this.currentSelectedContent.content.embed.url !=undefined
+      ){
+      this.selectedEmbeddedUrl=this.sanitizer.bypassSecurityTrustResourceUrl(this.currentSelectedContent.content.embed.url)
+      }
+    
+
 
   }
 

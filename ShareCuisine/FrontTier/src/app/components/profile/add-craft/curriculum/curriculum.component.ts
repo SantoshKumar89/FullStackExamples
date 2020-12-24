@@ -1,11 +1,12 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, OnDestroy } from '@angular/core';
 import { CraftService } from '../../../../services/craft.service';
 import { CraftFormService } from '../craft-form.service';
 import { Section } from '../../../../models/craft'
 import { Content } from '../../../../models/craft'
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -13,7 +14,8 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './curriculum.component.html',
   styleUrls: ['./curriculum.component.scss']
 })
-export class CurriculumComponent implements OnInit {
+export class CurriculumComponent implements OnInit,OnDestroy {
+  
 
   craftPreviewRoute:string;
   detailsForm: FormGroup;
@@ -24,6 +26,8 @@ export class CurriculumComponent implements OnInit {
     contentTitle: string,
     sectionTitle: string
   } = { contentIndex: 0, sectionIndex: 0, contentTitle: "", sectionTitle: "" };
+  craftFormSubscription: Subscription = new Subscription();;
+  craftServiceSubscription: Subscription = new Subscription();;
 
 
 
@@ -33,7 +37,7 @@ export class CurriculumComponent implements OnInit {
     private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.craftForm.craft.subscribe(res => {
+    this.craftFormSubscription=this.craftForm.craft.subscribe(res => {
       this.sections = res.curriculum.sections;
       this.craftPreviewRoute=`craft/${res._id}`;
     })
@@ -99,8 +103,9 @@ export class CurriculumComponent implements OnInit {
 
   save() {
     this.craftForm.currentCraftValue.curriculum.sections = this.sections;
-    this.craftService.updateCraftById(this.craftForm.currentCraftValue).subscribe(res => {
+    this.craftServiceSubscription=this.craftService.updateCraftById(this.craftForm.currentCraftValue).subscribe(res => {
       this.toastr.success('Updated', 'Curriculum');
+      this.craftForm.currentCraftValue=this.craftForm.currentCraftValue;//Triggers next method
     })
   }
 
@@ -124,7 +129,7 @@ export class CurriculumComponent implements OnInit {
       'title': new FormControl(currentContentObject.title),
       'content': new FormGroup({
         'embed': new FormGroup({
-          'url': new FormControl(url)
+          'url': new FormControl(url,Validators.required)
         }),
         'upload': new FormGroup({
           'location': new FormControl("")
@@ -142,5 +147,9 @@ export class CurriculumComponent implements OnInit {
     this.save();
   }
 
+  ngOnDestroy(): void {
+    this.craftFormSubscription.unsubscribe();
+    this.craftServiceSubscription.unsubscribe();
+  }
 
 }

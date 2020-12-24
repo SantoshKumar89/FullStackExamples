@@ -8,149 +8,108 @@
 
     </div>
     <!-- Profile details end here-->
-
-    <!-- Vidoe details start here-->
+    
 
     <div class="col-9 h_iframe">
-      <iframe src="https://www.youtube.com/embed/SF71ks5FrKQ" frameborder="0" allowfullscreen></iframe>
+      <!-- Vidoe details start here-->
+      <div *ngIf="craft.curriculum.sections.length > 0 && selectedEmbeddedUrl != undefined " >
+        <iframe  class="e2e-iframe-trusted-src" [src]="selectedEmbeddedUrl" frameborder="0" allowfullscreen></iframe>
+        <i class="far fa-grin-hearts fa-2x p-2"></i>
+        <i class="far fa-laugh fa-2x p-2"></i>
+        <i class="far fa-smile fa-2x p-2"></i>
 
-      <i class="far fa-grin-hearts fa-2x p-2"></i>
-      <i class="far fa-laugh fa-2x p-2"></i>
-      <i class="far fa-smile fa-2x p-2"></i>
+        <i class="far fa-frown fa-2x p-2"></i>
 
-      <i class="far fa-frown fa-2x p-2"></i>
+        <i class="far fa-angry fa-2x p-2"></i>
 
-      <i class="far fa-angry fa-2x p-2"></i>
-
-      <div class="inline floatRight">
-        <i class="far fa-bookmark fa-2x p-2 "></i>
-        <i class="fas fa-share fa-2x p-2"></i>
+        <div class="inline floatRight">
+          <i class="far fa-bookmark fa-2x p-2 "></i>
+          <i class="fas fa-share fa-2x p-2"></i>
+        </div>
+      </div>
+      <div  *ngIf="selectedEmbeddedUrl == undefined" >
+  <div class="landingPage">
+        <img src="../../../assets/Images/courseLandingPage/123.jpg">
+      </div>
       </div>
 
+      <!-- Vidoe details ends here-->
 
       <!-- Course details start here-->
-<div class="courseDetails border border-top mt-1 p-3 craft-details-custom" >
-      <div *ngIf="craft.courseLandingPage != undefined">
-        <h3 class=" border-primary">{{craft.courseLandingPage.courseTitle}}</h3>
-        <p><i class="fas fa-user-clock"></i><small> Last Updated: {{craft.createdDate}}</small>
-          <i class="ml-3 fas fa-globe pr-1"></i><small
-            *ngIf="craft.courseLandingPage.basicInfo !== undefined && craft.courseLandingPage.basicInfo.language !== undefined">Language:
-            {{craft.courseLandingPage.basicInfo.language.name}}</small>
-          <i class="fas ml-3 pr-1 fa-book-reader"></i><small
-            *ngIf="craft.courseLandingPage.basicInfo !== undefined && craft.courseLandingPage.basicInfo.level !== undefined">Level:
-            {{craft.courseLandingPage.basicInfo.level.value}}</small>
+      <div class="courseDetails border border-top mt-1 p-3 craft-details-custom">
+        <div *ngIf="craft.courseLandingPage != undefined">
+          <h3 class=" border-primary">{{craft.courseLandingPage.courseTitle}}</h3>
+          <p><i class="fas fa-user-clock"></i><small> Last Updated: {{craft.createdDate}}</small>
+            <i class="ml-3 fas fa-globe pr-1"></i><small
+              *ngIf="craft.courseLandingPage.basicInfo !== undefined && craft.courseLandingPage.basicInfo.language !== undefined">Language:
+              {{craft.courseLandingPage.basicInfo.language.name}}</small>
+            <i class="fas ml-3 pr-1 fa-book-reader"></i><small
+              *ngIf="craft.courseLandingPage.basicInfo !== undefined && craft.courseLandingPage.basicInfo.level !== undefined">Level:
+              {{craft.courseLandingPage.basicInfo.level.value}}</small>
 
 
-        </p>
-      </div>
+          </p>
+        </div>
         <hr>
 
-        <div class="coursePrerequisites py-3" *ngIf="craft.targetYourStudents.prerequisites != undefined && craft.targetYourStudents.prerequisites.answer != undefined">
-          <p class="p-0 m-1"><strong>Prerequisites</strong></p>
-          <span class="pr-2" *ngFor="let answer of craft.targetYourStudents.prerequisites.answer">
-            <span style="color:limegreen;">
-            <i class="fas fa-check-circle "></i></span>
+        <div class="coursePrerequisites py-3"
+          *ngIf="craft.targetYourStudents.prerequisites != undefined && craft.targetYourStudents.prerequisites.answer.length > 0 ">
+          <p class="p-0 m-1"><strong>Prerequisites : </strong></p>
+          <span class="" *ngFor="let answer of craft.targetYourStudents.prerequisites.answer">
+            <span style="color:limegreen;" *ngIf="answer !=  '' "  >
+              <i class="fas fa-check-circle "></i></span>
             {{answer}}
           </span>
         </div>
 
-        <div class="courseDescription py-3" *ngIf="craft.courseLandingPage != undefined">
-          <p class="p-0 m-1"><strong>Description</strong></p>
-          <p>
+        <div class="courseDescription py-3">
+          <p class="p-0 m-1"><strong>Description : </strong></p>
+          <p  *ngIf="craft.courseLandingPage != undefined">
             {{craft.courseLandingPage.courseDescription}}
           </p>
         </div>
 
-        <div class="courseLearn py-3" *ngIf="craft.targetYourStudents.learn != undefined && craft.targetYourStudents.learn.answer != undefined">
-          <p class="p-0 m-1"><strong>What you'll learn</strong></p>
+        <div class="courseLearn py-3"
+          *ngIf="craft.targetYourStudents.learn != undefined && craft.targetYourStudents.learn.answer != undefined">
+          <p class="p-0 m-1"><strong>What you'll learn : </strong></p>
           <p class="pr-2" *ngFor="let answer of craft.targetYourStudents.learn.answer">
-                    
-            <span style="color:tomato">
+            <span style="color:tomato" *ngIf="answer !=  '' " >
               <i class="fas fa-star"></i>
-          </span>
+            </span>
             {{answer}}
-            </p>
+          </p>
         </div>
 
-        <div class="courseTarget py-3" *ngIf="craft.targetYourStudents.target != undefined && craft.targetYourStudents.target.answer != undefined">
-          <p class="p-0 m-1"><strong>Who this course is for</strong></p>
+        <div class="courseTarget py-3"
+          *ngIf="craft.targetYourStudents.target != undefined && craft.targetYourStudents.target.answer != undefined">
+          <p class="p-0 m-1"><strong>Who this course is for :</strong></p>
           <span class="pr-2" *ngFor="let answer of craft.targetYourStudents.target.answer">
-            <span>
+            <span *ngIf="answer !=  '' " >
               <i class="fas fa-user"></i></span>
             {{answer}}
           </span>
         </div>
-        
 
       </div>
-
-      
-      
-
       <!-- Course details end here-->
 
     </div>
 
-    <!-- Vidoe details end here-->
 
     <!-- Cirriculum details start here-->
 
-    <div class="col-3 align-items-start" style="overflow-x: scroll; ">
-      <div class="list-group">
-        <button type="button" class="list-group-item list-group-item-action" data-toggle="collapse"
-          data-target="#Section1" role="button" aria-expanded="false" aria-controls="collapseExample">
-          <b>Section 1: Materials and tools</b>
-        </button>
-        <div id="Section1" class="collapse show">
-          <button type="button" class=" list-group-item list-group-item-action list-group-item-light"><span
-              class="ml-2">Materials and tools</span></button>
+    <div class="col-3 align-items-start" style="overflow-x: scroll; " *ngIf="craft.curriculum.sections.length > 0">
+      <div class="list-group" *ngFor="let section of craft.curriculum.sections; let i=index;">
+        <a  class="list-group-item list-group-item-action" data-toggle="collapse"
+          href="#section{{i}}" role="button" aria-expanded="false" aria-controls="collapseExample">
+          <b>{{section.title}}</b>
+        </a>
+        <div id="section{{i}}" class="collapse show" *ngFor="let content of craft.curriculum.sections[i].contents; let j=index">
+          <button type="button" class="list-group-item list-group-item-action list-group-item-light" (click)="showContent(i,j,content)"><span
+              class="ml-2">{{content.title}}</span></button>
         </div>
       </div>
 
-      <div class="list-group">
-        <button type="button" class="list-group-item list-group-item-action" data-toggle="collapse"
-          data-target="#Section2" role="button" aria-expanded="false" aria-controls="collapseExample">
-          <b>Section 2: How to begin</b>
-        </button>
-        <div id="Section2" class="collapse show">
-          <button type="button" class="list-group-item list-group-item-action list-group-item-light"> <span
-              class="ml-2">Step 1</span></button>
-          <button type="button" class="list-group-item list-group-item-action list-group-item-light"> <span
-              class="ml-2">Step 2</span></button>
-          <button type="button" class="list-group-item list-group-item-action list-group-item-light"> <span
-              class="ml-2">Step 3</span></button>
-        </div>
-      </div>
-
-      <div class="list-group">
-        <button type="button" class="list-group-item list-group-item-action " data-toggle="collapse"
-          data-target="#Section3" role="button" aria-expanded="false" aria-controls="collapseExample">
-          <b>Section 3: Putting it all Together</b>
-        </button>
-        <div id="Section3" class="collapse show">
-          <button type="button" class="list-group-item list-group-item-action list-group-item-light"> <span
-              class="ml-2">Step 1</span></button>
-          <button type="button" class="list-group-item list-group-item-action list-group-item-light"> <span
-              class="ml-2">Step 2</span></button>
-          <button type="button" class="list-group-item list-group-item-action list-group-item-light"> <span
-              class="ml-2">Step 3</span></button>
-        </div>
-      </div>
-
-      <div class="list-group">
-        <button type="button" class="list-group-item list-group-item-action " data-toggle="collapse"
-          data-target="#Section4" role="button" aria-expanded="false" aria-controls="collapseExample">
-          <b>Section 4: Bonus Videos</b>
-        </button>
-        <div id="Section4" class="collapse show">
-          <button type="button" class="list-group-item list-group-item-action list-group-item-light"> <span
-              class="ml-2">Step 1</span></button>
-          <button type="button" class="list-group-item list-group-item-action list-group-item-light"> <span
-              class="ml-2">Step 2</span></button>
-          <button type="button" class="list-group-item list-group-item-action list-group-item-light"> <span
-              class="ml-2">Step 3</span></button>
-        </div>
-      </div>
     </div>
     <!-- Cirriculum details end here-->
 

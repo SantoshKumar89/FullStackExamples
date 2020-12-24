@@ -1,12 +1,29 @@
-.h_iframe iframe {
-    width:100%;
-    height:550px;
+.h_iframe {
+	iframe {
+		width: 100%;
+		height: 550px;
+	}
+
+  img {
+    width: auto;
+    height: 550px;
+  }
+	div .landingPage {
+		
+			background-color: black;
+			text-align: center;
+			height: 550px;
+			
+     
+	}
 }
 
-div.floatRight{
-    float: right;
-  }
 
-  div.craft-details-custom{
-    background-color:white;box-shadow: 0 2px 8px 2px rgba(20,23,28,0.15);  
+div.floatRight {
+	float: right;
+}
+
+div.craft-details-custom {
+	background-color: white;
+	box-shadow: 0 2px 8px 2px rgba(20, 23, 28, 0.15);
 }

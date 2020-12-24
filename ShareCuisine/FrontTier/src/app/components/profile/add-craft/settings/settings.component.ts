@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, FormArray, Validators, RequiredValidator } from '@angular/forms';
 import { Enrollment } from 'src/app/models/enrollment';
 import { MasterService } from 'src/app/services/master.service';
 import { CraftService } from '../../../../services/craft.service';
 import { CraftFormService } from '../craft-form.service'
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -12,7 +13,8 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss']
 })
-export class SettingsComponent implements OnInit {
+export class SettingsComponent implements OnInit,OnDestroy {
+  
 
 
   enrollmentForm: FormGroup;
@@ -21,6 +23,10 @@ export class SettingsComponent implements OnInit {
   helperText: string;
   showPassword: boolean = false;
   privateWithPswConst = 'privateWithPsw';
+  craftFormSubscription: Subscription = new Subscription();;
+  craftServiceSubscription: Subscription = new Subscription();;
+  enrollmentServiceSubscription: Subscription = new Subscription();;
+
 
 
   constructor(private toastr: ToastrService,private craftForm: CraftFormService, private masterService: MasterService, private craftService: CraftService) { }
@@ -28,11 +34,11 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.masterService.getEnrollment().subscribe(res => {
+    this.enrollmentServiceSubscription=this.masterService.getEnrollment().subscribe(res => {
       this.enrollmentValues = res;
     })
 
-    this.craftForm.craft.subscribe(res => {
+    this.craftFormSubscription=this.craftForm.craft.subscribe(res => {
 
       let optionControl = res.settings != undefined ? new FormControl(res.settings.enrollment.option._id) : new FormControl("");
       let passwordControl = res.settings != undefined ? new FormControl(res.settings.enrollment.password) : new FormControl("");
@@ -61,17 +67,18 @@ export class SettingsComponent implements OnInit {
 
   saveEnrollmentForm() {
     this.craftForm.currentCraftValue.settings = { enrollment: this.enrollmentForm.value };
-    this.craftService.updateCraftById(this.craftForm.currentCraftValue).subscribe(res => {
+    this.craftServiceSubscription=this.craftService.updateCraftById(this.craftForm.currentCraftValue).subscribe(res => {
       this.toastr.success('Updated','Settings')
     });
   }
 
   saveCertificatesForm() {
 
-    console.log(this.certificatesForm.value);
     this.craftForm.currentCraftValue.enableCertificate = this.certificatesForm.value.enableCertificate;
-    this.craftService.updateCraftById(this.craftForm.currentCraftValue).subscribe(res => {
+    this.craftServiceSubscription=this.craftService.updateCraftById(this.craftForm.currentCraftValue).subscribe(res => {
       this.toastr.success('Updated','Settings')
+      this.craftForm.currentCraftValue=this.craftForm.currentCraftValue;//Triggers next method
+
     });
 
   }
@@ -88,6 +95,13 @@ export class SettingsComponent implements OnInit {
 
     this.helperText = this.enrollmentValues.filter(enrollValues => (enrollValues._id == this.enrollmentForm.get('option').value))[0].helperText;
 
+  }
+
+  ngOnDestroy(): void {
+
+    this.craftFormSubscription.unsubscribe();
+    this.craftServiceSubscription.unsubscribe();
+    this.enrollmentServiceSubscription.unsubscribe();
   }
 
 }

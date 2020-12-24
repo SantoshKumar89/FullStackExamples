@@ -24,13 +24,13 @@ const craftSchema = mongoose.Schema({
     },
     targetYourStudents: {
         learn: {
-            answer: { type: [String], default: [""] }
+            answer: { type: [String], default: ["To Build Craft"] }
         },
         prerequisites: {
-            answer: { type: [String], default: [""] }
+            answer: { type: [String], default: ["Paper","Glue","Paint"] }
         },
         target: {
-            answer: { type: [String], default: [""] }
+            answer: { type: [String], default: ["Beginners","All Levels"] }
         }
     },
     curriculum: {
@@ -53,13 +53,15 @@ const craftSchema = mongoose.Schema({
     },
     courseLandingPage: {
         courseTitle: {
-            type: String
+            type: String,
+            default: "Course Title"
         },
         courseSubtitle: {
             type: String
         },
         courseDescription: {
-            type: String
+            type: String,
+            default: "Course Description"
         },
         basicInfo: {
             language: {
