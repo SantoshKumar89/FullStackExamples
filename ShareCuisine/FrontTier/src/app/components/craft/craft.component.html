@@ -29,7 +29,10 @@
       </div>
       <div  *ngIf="selectedEmbeddedUrl == undefined" >
   <div class="landingPage">
-        <img src="../../../assets/Images/courseLandingPage/123.jpg">
+        <img [src]="craft.courseLandingPage.courseImage"
+         alt="..." *ngIf="craft.courseLandingPage.courseImage !== undefined">
+     <img   src= "../../../assets/Images/courseLandingPage/default.jpg" *ngIf="craft.courseLandingPage.courseImage == undefined">
+
       </div>
       </div>
 

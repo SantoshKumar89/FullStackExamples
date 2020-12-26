@@ -8,6 +8,10 @@ import { CraftFormService } from '../craft-form.service';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 
+interface LandingPageUrl {
+  name: String,
+  value: String
+}
 
 
 @Component({
@@ -15,27 +19,49 @@ import { Subscription } from 'rxjs';
   templateUrl: './course-landing-page.component.html',
   styleUrls: ['./course-landing-page.component.scss']
 })
-export class CourseLandingPageComponent implements OnInit,OnDestroy {
-  
+export class CourseLandingPageComponent implements OnInit, OnDestroy {
+
 
   landingPageForm: FormGroup;
   languages: Language[];
   levels: Level[];
   defaultLanguage: Language;
   defaultLevel: Level;
-  craftFormSubscription: Subscription = new Subscription();;
-  craftServiceSubscription: Subscription = new Subscription();;
-  languageServiceSubscription: Subscription = new Subscription();;
-  levelServiceSubscription: Subscription = new Subscription();;
+  craftFormSubscription: Subscription = new Subscription();
+  craftServiceSubscription: Subscription = new Subscription();
+  languageServiceSubscription: Subscription = new Subscription();
+  levelServiceSubscription: Subscription = new Subscription();
+  landingPageThumbnail: String;
+
+  landingPageImageUrls: LandingPageUrl[] = [
+   
+    {
+      name: "red",
+      value: "https://res.cloudinary.com/mhmd/image/upload/v1556294927/cody-davis-253928-unsplash_vfcdcl.jpg"
+    },
+    {
+      name: "yellow",
+      value: "https://res.cloudinary.com/mhmd/image/upload/v1556294929/matthew-hamilton-351641-unsplash_zmvozs.jpg"
+    }
+    , {
+      name: "orange", value:
+        "https://res.cloudinary.com/mhmd/image/upload/v1556294926/cody-davis-253925-unsplash_hsetv7.jpg",
+
+    },
+    { name: "blue", value: "https://res.cloudinary.com/mhmd/image/upload/v1556294928/tim-foster-734470-unsplash_xqde00.jpg" },
+    { name: "pink", value: "https://res.cloudinary.com/mhmd/image/upload/v1556294927/mike-meyers-737494-unsplash_yd11yq.jpg" },
+    { name: "light", value: "https://res.cloudinary.com/mhmd/image/upload/v1556294930/ronald-cuyan-434484-unsplash_iktjid.jpg" },
+    { name: "dark", value: "https://res.cloudinary.com/mhmd/image/upload/v1556294929/matthew-hamilton-351641-unsplash_zmvozs.jpg" }
+  ]
 
 
 
 
-  constructor(private toastr: ToastrService,private craftForm: CraftFormService, private masterService: MasterService, private craftService: CraftService) { }
+  constructor(private toastr: ToastrService, private craftForm: CraftFormService, private masterService: MasterService, private craftService: CraftService) { }
 
   ngOnInit(): void {
 
-   this.languageServiceSubscription= this.masterService.getLanguage().subscribe(res => {
+    this.languageServiceSubscription = this.masterService.getLanguage().subscribe(res => {
       this.languages = res;
 
       this.defaultLanguage = res.filter(data => data.isDefault === true)[0];
@@ -52,7 +78,7 @@ export class CourseLandingPageComponent implements OnInit,OnDestroy {
 
     })
 
-    this.levelServiceSubscription=this.masterService.getLevel().subscribe(res => {
+    this.levelServiceSubscription = this.masterService.getLevel().subscribe(res => {
       this.levels = res;
 
       this.defaultLevel = res.filter(data => data.isDefault === true)[0];
@@ -62,7 +88,7 @@ export class CourseLandingPageComponent implements OnInit,OnDestroy {
 
         const levelSelection = this.landingPageForm.get('basicInfo').get('level');
 
-        if (res.courseLandingPage != undefined && res.courseLandingPage.basicInfo != undefined && res.courseLandingPage.basicInfo.language != undefined  )
+        if (res.courseLandingPage != undefined && res.courseLandingPage.basicInfo != undefined && res.courseLandingPage.basicInfo.language != undefined)
           levelSelection.setValue(res.courseLandingPage.basicInfo.level._id)
         else {
           levelSelection.setValue(this.defaultLevel._id)
@@ -72,21 +98,22 @@ export class CourseLandingPageComponent implements OnInit,OnDestroy {
 
     })
 
-    this.craftFormSubscription=this.craftForm.craft.subscribe(res => {
+    this.craftFormSubscription = this.craftForm.craft.subscribe(res => {
 
 
+
+      console.log(res.courseLandingPage);
       this.landingPageForm = new FormGroup({
-        'courseTitle': new FormControl((res.courseLandingPage !=undefined)? res.courseLandingPage.courseTitle:"Course title",Validators.required),
-        'courseSubtitle': new FormControl((res.courseLandingPage !=undefined)?res.courseLandingPage.courseSubtitle:""),
-        'courseDescription': new FormControl((res.courseLandingPage !=undefined)?res.courseLandingPage.courseDescription:"Course description",Validators.required),
+        'courseTitle': new FormControl((res.courseLandingPage != undefined) ? res.courseLandingPage.courseTitle : "Course title", Validators.required),
+        'courseSubtitle': new FormControl((res.courseLandingPage != undefined) ? res.courseLandingPage.courseSubtitle : ""),
+        'courseDescription': new FormControl((res.courseLandingPage != undefined) ? res.courseLandingPage.courseDescription : "Course description", Validators.required),
         'basicInfo': new FormGroup({
           'language': new FormControl(""),
           'level': new FormControl("")
         }),
-        'courseImage': new FormControl((res.courseLandingPage !=undefined)?res.courseLandingPage.courseImage:""),
-        'promotionalVideo': new FormControl((res.courseLandingPage !=undefined)?res.courseLandingPage.promotionalVideo:"")
+        'courseImage': new FormControl((res.courseLandingPage != undefined && res.courseLandingPage.courseImage != null) ? res.courseLandingPage.courseImage : ''),
+        'promotionalVideo': new FormControl((res.courseLandingPage != undefined) ? res.courseLandingPage.promotionalVideo : "")
       })
-
 
     }
 
@@ -99,12 +126,14 @@ export class CourseLandingPageComponent implements OnInit,OnDestroy {
 
   save() {
 
-    this.craftForm.currentCraftValue.courseLandingPage = this.landingPageForm.value;
 
-    this.craftServiceSubscription=this.craftService.updateCraftById(this.craftForm.currentCraftValue).subscribe(res => {
-      this.toastr.success('Updated','Course Landing Page')
-      this.craftForm.currentCraftValue=this.craftForm.currentCraftValue;//Triggers next method
-      
+    this.craftForm.currentCraftValue.courseLandingPage = this.landingPageForm.value;
+    
+    console.log(this.landingPageForm.value);
+    this.craftServiceSubscription = this.craftService.updateCraftById(this.craftForm.currentCraftValue).subscribe(res => {
+      this.toastr.success('Updated', 'Course Landing Page')
+      this.craftForm.currentCraftValue = this.craftForm.currentCraftValue;//Triggers next method
+
     });
 
 
@@ -117,4 +146,8 @@ export class CourseLandingPageComponent implements OnInit,OnDestroy {
     this.levelServiceSubscription.unsubscribe()
   }
 
+  changeLoadedThumbnail() {
+
+    this.landingPageThumbnail = this.landingPageForm.get('courseImage').value;
+  }
 }

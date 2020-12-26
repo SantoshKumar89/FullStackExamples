@@ -41,7 +41,7 @@ export class AddCraftComponent implements OnInit,OnDestroy {
     this.queryPathSubscription=this.route.queryParams.subscribe(params => {
       this.craftForm.currentCraftValue._id = this.route.snapshot.paramMap.get('craftId');
       this.craftId=this.craftForm.currentCraftValue._id;
-      this.userId= this.route.snapshot.paramMap.get('userId');
+      this.userId= this.route.snapshot.paramMap.get('profileId');
     });
 
     this.craftServiceSubscription=this.craftService.getCraftById(this.craftForm.currentCraftValue._id).subscribe(res => {
@@ -89,7 +89,8 @@ export class AddCraftComponent implements OnInit,OnDestroy {
   publish(){
 
     this.craftForm.currentCraftValue.publish = true;
-    this.craftServiceSubscription=this.craftService.updateCraftById(this.craftForm.currentCraftValue).subscribe(res => {
+
+   this.craftServiceSubscription=this.craftService.updateCraftById(this.craftForm.currentCraftValue).subscribe(res => {
       this.toastr.success('Published Successfully!!', 'Craft');
       const routeUrl=`/profile/${this.userId}`
       this.router.navigate([routeUrl]);

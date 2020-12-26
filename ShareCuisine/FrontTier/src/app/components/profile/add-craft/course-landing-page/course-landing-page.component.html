@@ -40,16 +40,22 @@
             <label>Course image</label>
             <div class="row ">
                 <div class="col-6">
-                    <img src="https://res.cloudinary.com/mhmd/image/upload/v1556294929/matthew-hamilton-351641-unsplash_zmvozs.jpg"
-                        class="img-thumbnail" alt="...">
+                    <img [src]="landingPageThumbnail"
+                        class="img-thumbnail" alt="..." *ngIf="landingPageThumbnail !== undefined">
+                     <img  class="img-thumbnail" src= "../../../../../assets/Images/courseLandingPage/default.jpg" *ngIf="landingPageThumbnail == undefined">
                 </div>
                 <div class="col-6">
                     <label>Upload your course image here. It must meet our course image quality standards to be
                         accepted.
                         Important guidelines: 750x422 pixels; .jpg, .jpeg,. gif, or .png. no text on the image.</label>
                     <div class="mb-3">
-                        <input class="form-control form-control-sm" id="courseImage" type="file"
-                            formControlName="courseImage">
+                            <select (change)=changeLoadedThumbnail() id="courseImage" name="courseImage" class="form-control" formControlName="courseImage">
+                                <option value="" disabled> Select a level</option>
+                                <option *ngFor="let img of landingPageImageUrls" [ngValue]="img.value" >
+                                    {{img.name}}
+                                </option>
+                            </select>
+
                     </div>
                 </div>
             </div>

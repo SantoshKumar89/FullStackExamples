@@ -24,7 +24,7 @@ craftRouter.put("/", async function (req, res) {
 //Get All Craft objects
 craftRouter.get("/", async function (req, res) {
 
-    const data=await craft.find().populate(['courseLandingPage.basicInfo.language','courseLandingPage.basicInfo.level','settings.enrollment.option']);
+    const data=await craft.find({'publish':true}).populate(['courseLandingPage.basicInfo.language','courseLandingPage.basicInfo.level','settings.enrollment.option']);
     res.send(data);
 });
 

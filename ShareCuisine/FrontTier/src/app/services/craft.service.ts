@@ -32,6 +32,10 @@ export class CraftService {
     })
   }
 
+  /** Get: Get Craft details from database */
+  getCraft(): Observable<[Craft]> {
+    return this.http.get<[Craft]>(`${environment.apiUrl}/api/v1/craft`)
+  }
 
 
 }
