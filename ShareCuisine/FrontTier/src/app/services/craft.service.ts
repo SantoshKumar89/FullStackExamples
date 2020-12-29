@@ -37,5 +37,10 @@ export class CraftService {
     return this.http.get<[Craft]>(`${environment.apiUrl}/api/v1/craft`)
   }
 
+  /** Get: Get  Craft by User details from database */
+  getUserCraft(userId:string,isPublished:boolean): Observable<[Craft]> {
+    return this.http.get<[Craft]>(`${environment.apiUrl}/api/v1/craft/createdBy/${userId}?isPublished=${isPublished}`)
+  }
+
 
 }

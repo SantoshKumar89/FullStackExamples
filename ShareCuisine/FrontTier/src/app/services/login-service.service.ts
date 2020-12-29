@@ -14,7 +14,7 @@ export class LoginServiceService {
 
 
   private currentUserSubject: BehaviorSubject<User>;
-  private currentUser: Observable<User>;
+  public currentUser: Observable<User>;
 
 
   constructor(private http: HttpClient) {
@@ -27,6 +27,11 @@ export class LoginServiceService {
    // Get logged in user details
    public get currentUserValue(): User {
     return this.currentUserSubject.value;
+  }
+
+  public set currentUserValue(user:User) {
+    this.currentUserSubject.next(user);
+    
   }
 
   /** POST: add a new user to the database */

@@ -17,7 +17,7 @@
                 <a class="nav-link" href="#myAlert" data-toggle="collapse">Link</a>
             </li>-->
         </ul>
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav ml-auto" *ngIf="user != undefined">
             <li class="nav-item">
                 <a class="nav-link" routerLink="/profile/{{user._id}}" data-target="#myModal"  data-toggle="modal"><i class="fas fa-user-circle fa-2x"></i></a>                
             </li>                        

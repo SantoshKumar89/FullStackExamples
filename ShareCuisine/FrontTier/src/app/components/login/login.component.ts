@@ -32,7 +32,9 @@ export class LoginComponent implements OnInit {
       this.isLoginValid=true;
 
     if(res.token != undefined){
+      console.log(res.token);
       sessionStorage.setItem('token', res.token);
+      this.loginService.currentUserValue=this.loginService.tokenDecoder(res.token);
       this.router.navigate(['/home']);
     }else{
       this.isLoginValid=false;

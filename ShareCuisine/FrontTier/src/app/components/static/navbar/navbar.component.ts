@@ -16,7 +16,15 @@ export class NavbarComponent implements OnInit {
   constructor(public nav: NavbarServiceService,private loginService: LoginServiceService) { }
 
   ngOnInit(): void {
-    this.user=this.loginService.currentUserValue;
+    console.log("llslsll"+this.user);
+
+    this.loginService.currentUser.subscribe(res => {
+      this.user=this.loginService.currentUserValue;
+      console.log("llslsll"+this.user);
+
+    })
+
+    
 
   }
 

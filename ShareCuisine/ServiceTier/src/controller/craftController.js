@@ -1,5 +1,6 @@
 const express = require("express"),craftRouter = express.Router();
-const craft = require("../model/craft")
+const craft = require("../model/craft");
+const mongoose = require('mongoose');
 
 //Create Craft object
 craftRouter.post("/", async function (req, res) {
@@ -24,7 +25,7 @@ craftRouter.put("/", async function (req, res) {
 //Get All Craft objects
 craftRouter.get("/", async function (req, res) {
 
-    const data=await craft.find({'publish':true}).populate(['courseLandingPage.basicInfo.language','courseLandingPage.basicInfo.level','settings.enrollment.option']);
+    const data=await craft.find({publish:true}).populate(['courseLandingPage.basicInfo.language','courseLandingPage.basicInfo.level','settings.enrollment.option']);
     res.send(data);
 });
 
@@ -32,6 +33,20 @@ craftRouter.get("/", async function (req, res) {
 craftRouter.get("/:id", async function (req, res) {
     const data=await craft.find({_id:req.params.id}).populate(['courseLandingPage.basicInfo.language','courseLandingPage.basicInfo.level','settings.enrollment.option']);
     res.send(data[0]);
+
+});
+
+
+//Get All Published Crafts created By user
+craftRouter.get("/createdBy/:userId", async function (req, res) {
+
+    console.log(req.query.isPublished);
+    const isPublished=req.query.isPublished != undefined ? req.query.isPublished : false;
+    const userId = new mongoose.Types.ObjectId(req.params.userId);
+    console.log(isPublished);
+
+    const data=await craft.find({"$and":[{createdBy :userId,publish : isPublished}]}).populate(['courseLandingPage.basicInfo.language','courseLandingPage.basicInfo.level','settings.enrollment.option']);
+    res.send(data);
 
 });
 

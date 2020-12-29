@@ -1,5 +1,5 @@
 <div class="container">
-<div class="row sticky" style="z-index: 1;">
+<div class="row sticky" style="z-index: 1;" *ngIf="user!==undefined">
 
     <div class="col-4 py-4 text-center">
         <img class="profilePicture" src="../../../assets/Images/SiginUp.jpg">
@@ -8,15 +8,19 @@
 
         <div class="d-flex flex-column">
             <div class="p-2">
-                <h1 class="font-weight-lighter">Santosh Kumar</h1>   
+                <h1 class="font-weight-lighter">{{user.name}}</h1>   
                 <hr>             
-                <button type="button"
+                <button type="button" *ngIf="isUserProfile == true"
                     class="btn btn-primary btn-sm mr-2" data-toggle="button" (click)="addCraft()"
                     aria-pressed="false"><i class="fas fa-plus pr-2 "></i>Add Craft</button>
                 
-                <button type="button"
+                <button type="button" *ngIf="isUserProfile == true" 
                     class="btn btn-secondary btn-sm" data-toggle="button" routerLink="/profile/{{user._id}}/editProfile"
                     aria-pressed="false"><i class="far fa-edit pr-2"></i>Edit Profile</button>
+
+                    <button type="button" *ngIf="isUserProfile != true" 
+                    class="btn btn-primary btn-sm" data-toggle="button"   
+                    aria-pressed="false"><i class="fas fa-plus pr-2"></i>Follow</button>
                     
             </div>
             <div class="p-2 ">
@@ -35,8 +39,8 @@
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                 <a class="nav-link active" id="nav-my-crafts-tab" data-toggle="tab" href="#nav-my-crafts" role="tab"
                     aria-controls="nav-my-crafts" aria-selected="true">My Crafts</a>
-                <a class="nav-link" id="nav-saved-crafts-tab" data-toggle="tab" href="#nav-saved-crafts" role="tab"
-                    aria-controls="nav-saved-crafts" aria-selected="false">Favorite Crafts</a>
+                <!--<a class="nav-link" id="nav-saved-crafts-tab" data-toggle="tab" href="#nav-saved-crafts" role="tab"
+                    aria-controls="nav-saved-crafts" aria-selected="false">Favorite Crafts</a>-->
                 <a class="nav-link" id="nav-saved-crafts-tab" data-toggle="tab" href="#nav-saved-crafts" role="tab"
                     aria-controls="nav-saved-crafts" aria-selected="false">Draft Crafts</a>
             </div>
